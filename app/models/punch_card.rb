@@ -1,0 +1,2 @@
+class PunchCard < ApplicationRecord
+end
