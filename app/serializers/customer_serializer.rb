@@ -1,3 +1,5 @@
 class CustomerSerializer < ActiveModel::Serializer
-  attributes :id, :name, :contact, :user_name
+  attributes :name, :contact, :user_name
+  has_many :punch_cards
+  # has_many :coffee_shops, through: :punch_cards
 end

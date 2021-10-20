@@ -1,8 +1,7 @@
 class CoffeeShopSerializer < ActiveModel::Serializer
-  attributes :id, :name, :address, :description, :contact, :user_name
+  attributes :name, :address, :description, :contact, :user_name
 
-  def index
-    shop = CoffeeShop.all
-    render json: shop
-  end
+  has_many :punch_cards
+  has_many :customers, through: :punch_cards
+
 end
