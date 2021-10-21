@@ -1,11 +1,9 @@
 class CustomersController < ApplicationController
-  before_action :set_customer, only: [:show, :update, :destroy]
+  before_action :set_customer, only: [:show, :update, :destroy, :show_punch_cards, :show_coffee_shops]
     def index
         customers = Customer.all
         render json: customers, each_serializer: CustomerSerializer
       end
-
- 
 
       def show
         if @customer 
@@ -23,7 +21,7 @@ class CustomersController < ApplicationController
 
     def update
       @customer.update(customer_params)
-      render json: customer, status: :accepted
+      render json: @customer, status: :accepted
       
   end
   
@@ -31,6 +29,18 @@ class CustomersController < ApplicationController
       
     @customer.destroy
     head :no_content, status: :ok
+  end
+
+
+  def show_punch_cards
+    if @customer
+      render json: @customer.punch_cards, status: :ok
+    end
+  end
+  def show_coffee_shops
+    if @customer
+      render json: @customer.coffee_shops, status: :ok
+    end
   end
 
 

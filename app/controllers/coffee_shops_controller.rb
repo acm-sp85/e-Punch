@@ -1,5 +1,5 @@
 class CoffeeShopsController < ApplicationController
-  before_action :set_coffee_shop, only: [:show, :update, :destroy]
+  before_action :set_coffee_shop, only: [:show, :update, :destroy, :show_customers]
     def index
         shops = CoffeeShop.all
         render json: shops, each_serializer: CoffeeShopSerializer
@@ -21,7 +21,7 @@ class CoffeeShopsController < ApplicationController
       
       def update
         @coffee_shop.update(shop_params)
-        render json: shop, status: :accepted
+        render json: @coffee_shop, status: :accepted
         
     end
     def destroy
@@ -29,6 +29,17 @@ class CoffeeShopsController < ApplicationController
       @coffee_shop.destroy
       head :no_content, status: :ok
     end
+
+
+    def show_customers
+      
+      if @coffee_shop
+      render json: @coffee_shop.customers, status: :accepted
+    else
+      render json: {error: "Coffee shop not found"} , status: :not_found
+
+      end
+  end
 
 
       private

@@ -21,7 +21,7 @@ class PunchCardsController < ApplicationController
 
     def update
       @punch.update(punch_params)
-      render json: punch, status: :accepted
+      render json: @punch, status: :accepted
       
     end
     
