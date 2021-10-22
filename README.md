@@ -323,4 +323,10 @@ For additional support, check out these guides on Heroku:
 [heroku rails deploying guide]: https://devcenter.heroku.com/articles/getting-started-with-rails6
 [troubleshooting guide on heroku]: https://devcenter.heroku.com/articles/getting-started-with-rails6#troubleshooting
 
-asdasdasdasda
+---
+
+- install gem faker: gem install faker
+
+- install bootstrap: npm install react-bootstrap bootstrap@5.1.3
+
+- react touter dom: npm install --save react-router-dom
