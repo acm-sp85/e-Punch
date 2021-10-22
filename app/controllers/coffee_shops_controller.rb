@@ -1,5 +1,5 @@
 class CoffeeShopsController < ApplicationController
-  before_action :set_coffee_shop, only: [:show, :update, :destroy, :show_customers]
+  before_action :set_coffee_shop, only: [:show, :update, :destroy, :show_customers, :show_punch_cards]
     def index
         shops = CoffeeShop.all
         render json: shops, each_serializer: CoffeeShopSerializer
@@ -15,7 +15,12 @@ class CoffeeShopsController < ApplicationController
       
       def create
         shop = CoffeeShop.create!(shop_params)
+        if shop.valid?
+        session[:shop_id] = shop.id
         render json: shop, status: :created
+        else
+          render json: {errors: shop.errors.full_messages}, status: :unprocessable_entity
+        end
         
       end
       
@@ -41,11 +46,22 @@ class CoffeeShopsController < ApplicationController
       end
   end
 
+  
+    def show_punch_cards
+      
+      if @coffee_shop
+      render json: @coffee_shop.punch_cards, status: :accepted
+    else
+      render json: {error: "This coffee shop has no current punch cards"} , status: :not_found
+
+      end
+  end
+
 
       private
 
       def shop_params
-        params.require(:coffee_shop).permit(:id, :name, :address, :description, :contact, :user_name)
+        params.permit(:id, :name, :address, :description, :contact, :user_name)
       end
 
       def set_coffee_shop

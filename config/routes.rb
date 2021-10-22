@@ -14,6 +14,8 @@ Rails.application.routes.draw do
   get "/customers/:id/coffee_shops", to: "customers#show_coffee_shops"
   
   get "/coffee_shops/:id/customers", to: "coffee_shops#show_customers"
+  get "/coffee_shops/:id/punch_cards", to: "coffee_shops#show_punch_cards"
+  # get "/signup", to: "coffee_shops#create"
   # get "/cards", to: "punch_cards#index"
   # get "/cards/:id", to: "punch_cards#show"
 
