@@ -3,6 +3,12 @@ Rails.application.routes.draw do
   resources :punch_cards
   resources :customers
   resources :coffee_shops
+  resources :sessions, only: [:create]
+  resources :registrations, only: [:create]
+  delete :logout, to: "sessions#logout"
+  get :logged_in, to: "sessions#logged_in"
+  root to: "static#home"
+
   
   # Routing logic: fallback requests for React Router.
   # Leave this here to help deploy your app later!

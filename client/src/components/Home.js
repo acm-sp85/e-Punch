@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import RenderList from "../components/RenderList";
 import "../App.css";
 
-function fetching() {
+function Fetching() {
   // Declare a new state variable, which we'll call "count"
 
   const [coffee_shops, setCoffee_shops] = useState([]);
@@ -39,4 +39,4 @@ function fetching() {
     </div>
   );
 }
-export default fetching;
+export default Fetching;
