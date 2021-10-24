@@ -17,7 +17,7 @@ function Login() {
       }),
     };
 
-    fetch("/coffee_shops", requestOptions)
+    fetch("/login", requestOptions)
       .then((response) => response.json())
       .then((shops) => {
         console.log(shops);

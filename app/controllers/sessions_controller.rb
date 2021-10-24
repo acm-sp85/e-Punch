@@ -10,6 +10,7 @@ include CurrentUserConcern
       if coffee_shop&.authenticate(params[:password])
         session[:coffee_shop_id] = coffee_shop.id
         render json: coffee_shop, status: :ok
+        byebug
       else
         render json: { error: "Invalid username or password"} , status: :unauthorized
       end
