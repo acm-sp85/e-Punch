@@ -1,18 +1,47 @@
 import React, { useState, useEffect } from "react";
-import Registration from "./auth/Registration";
 import "../App.css";
 
 function Login() {
-  // Declare a new state variable, which we'll call "count"
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-  const [coffee_shops, setCoffee_shops] = useState([]);
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
-  useEffect(() => {}, []);
+    const requestOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        user_name: email,
+        password: password,
+      }),
+    };
+
+    fetch("/coffee_shops", requestOptions)
+      .then((response) => response.json())
+      .then((shops) => {
+        console.log(shops);
+      });
+  };
 
   return (
     <div>
-      <p>LOGIN</p>
-      <Registration />
+      <h1>LOGIN</h1>
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          placeholder="Email..."
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <input
+          type="password"
+          placeholder="Password..."
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <button type="submit">LOGIN</button>
+      </form>
     </div>
   );
 }

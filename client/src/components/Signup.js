@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import "../../App.css";
+import React, { useState, useEffect } from "react";
+import "../App.css";
 
-function Registration() {
+function Signup() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
@@ -28,6 +28,7 @@ function Registration() {
 
   return (
     <div>
+      <h1>SIGNUP</h1>
       <form onSubmit={handleSubmit}>
         <input
           type="text"
@@ -47,9 +48,9 @@ function Registration() {
           value={passwordConfirmation}
           onChange={(e) => setPasswordConfirmation(e.target.value)}
         />
-        <button type="submit">SUBMIT</button>
+        <button type="submit">SIGNUP</button>
       </form>
     </div>
   );
 }
-export default Registration;
+export default Signup;

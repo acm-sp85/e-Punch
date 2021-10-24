@@ -26,7 +26,8 @@ Rails.application.routes.draw do
   # get "/cards", to: "punch_cards#index"
   # get "/cards/:id", to: "punch_cards#show"
 
-  get "/me", to: "coffee_shops#show_profile"
+  get "/me", to: "sessions#logged_in"
+  post "/login", to: "sessions#create"
 
 
 # POST 
