@@ -22,9 +22,6 @@ class CoffeeShopsController < ApplicationController
       end
       
 
-
-
-
       def create
         shop = CoffeeShop.create!(shop_params)
         if shop.valid?
@@ -42,6 +39,7 @@ class CoffeeShopsController < ApplicationController
         render json: @coffee_shop, status: :accepted
         
     end
+
     def destroy
       
       @coffee_shop.destroy
@@ -70,6 +68,18 @@ class CoffeeShopsController < ApplicationController
       end
   end
 
+  def logged_in
+    if session[:coffee_shop_id]
+      coffee_shop = CoffeeShop.find_by(id: session[:coffee_shop_id])
+        render json: {
+            logged_in: true,
+            user: coffee_shop
+        }
+    else
+        render json: {error: "uvas"}, status: :unauthorized
+    end
+end
+
 
       private
 
@@ -78,7 +88,11 @@ class CoffeeShopsController < ApplicationController
       end
 
       def set_coffee_shop
-        @coffee_shop = CoffeeShop.find_by(id: params[:id])
+       
+          @coffee_shop = CoffeeShop.find_by(id: params[:id])
+
+
+
       end
       
 end

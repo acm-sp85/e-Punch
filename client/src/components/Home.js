@@ -9,7 +9,16 @@ function Fetching() {
   const [punch_cards, setPunch_cards] = useState([]);
   const [customers, setCustomers] = useState([]);
 
+  const whoAmI = () => {
+    fetch("/me")
+      .then((response) => response.json())
+      .then((me) => {
+        console.log("YOU ARE LOGGED IN:", me);
+      });
+  };
+
   useEffect(() => {
+    whoAmI();
     // Update the document title using the browser API
     fetch("/coffee_shops")
       .then((response) => response.json())

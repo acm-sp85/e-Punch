@@ -3,13 +3,13 @@ include CurrentUserConcern
 
 
     def create
-      coffee_shop = CoffeeShop
+      user = CoffeeShop
               .find_by(user_name: params["user_name"])
               # .try(:authenticate, params["coffee_shop"]["password"])
   
-      if coffee_shop&.authenticate(params[:password])
-        session[:coffee_shop_id] = coffee_shop.id
-        render json: coffee_shop, status: :ok
+      if user&.authenticate(params[:password])
+        session[:user] = user.id
+        render json: user, status: :ok
 
       else
         render json: { error: "Invalid username or password"} , status: :unauthorized
@@ -20,7 +20,7 @@ include CurrentUserConcern
         if session[:coffee_shop_id] 
             render json: {
                 logged_in: true,
-                coffee_shop: coffee_shop_id
+                user: user
             }
         else
             render json: {error: "moscatel"}, status: :unauthorized

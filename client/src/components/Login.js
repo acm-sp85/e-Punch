@@ -5,6 +5,18 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  useEffect(() => {
+    whoAmI();
+  }, []);
+
+  const whoAmI = () => {
+    fetch("/me")
+      .then((response) => response.json())
+      .then((me) => {
+        console.log("YOU ARE LOGGED IN:", me);
+      });
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -21,7 +33,17 @@ function Login() {
       .then((response) => response.json())
       .then((shops) => {
         console.log(shops);
+        setEmail(shops.user_name);
+        console.log(
+          "we need to create a callback function to store our users info in state"
+        );
       });
+  };
+
+  const deleteRequest = (e) => {
+    fetch("/logout", { method: "DELETE" }).then(() =>
+      console.log("Logged out:", email)
+    );
   };
 
   return (
@@ -42,6 +64,7 @@ function Login() {
         />
         <button type="submit">LOGIN</button>
       </form>
+      <button onClick={deleteRequest}>Logout</button>
     </div>
   );
 }
