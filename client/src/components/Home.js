@@ -29,6 +29,11 @@ function Fetching() {
         // console.log(customers);
         setCustomers(customers);
       });
+    fetch("/me")
+      .then((response) => response.json())
+      .then((me) => {
+        console.log(me);
+      });
   }, []);
   //   return coffee_shops.map((shop) => <p key={shop.id}>{shop.name}</p>);
   return (

@@ -6,7 +6,7 @@ class ApplicationController < ActionController::API
   private
 
   def current_coffe_shop
-    CoffeeShop.first
+    @current_coffe_shop ||= CoffeeShop.find_by_id(session[:coffee_shop_id])
   end
 
 end

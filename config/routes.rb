@@ -21,9 +21,12 @@ Rails.application.routes.draw do
   
   get "/coffee_shops/:id/customers", to: "coffee_shops#show_customers"
   get "/coffee_shops/:id/punch_cards", to: "coffee_shops#show_punch_cards"
+  post "/signup", to: "coffee_shops#create"
   # get "/signup", to: "coffee_shops#create"
   # get "/cards", to: "punch_cards#index"
   # get "/cards/:id", to: "punch_cards#show"
+
+  get "/me", to: "coffee_shops#show_profile"
 
 
 # POST 
