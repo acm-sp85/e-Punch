@@ -10,20 +10,20 @@ include CurrentUserConcern
       if coffee_shop&.authenticate(params[:password])
         session[:coffee_shop_id] = coffee_shop.id
         render json: coffee_shop, status: :ok
-        byebug
+
       else
         render json: { error: "Invalid username or password"} , status: :unauthorized
       end
     end
 
     def logged_in
-        if current_coffe_shop
+        if session[:coffee_shop_id] 
             render json: {
                 logged_in: true,
-                coffee_shop: current_coffe_shop
+                coffee_shop: coffee_shop_id
             }
         else
-            render json: {}, status: :unauthorized
+            render json: {error: "moscatel"}, status: :unauthorized
         end
     end
 
@@ -33,4 +33,7 @@ include CurrentUserConcern
         session.delete :coffee_shop_id
         render json: { status: 200, logged_out: true}
     end
+
+
+
   end

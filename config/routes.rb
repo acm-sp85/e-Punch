@@ -28,6 +28,7 @@ Rails.application.routes.draw do
 
   get "/me", to: "sessions#logged_in"
   post "/login", to: "sessions#create"
+  delete "/logout", to: "sessions#logout"
 
 
 # POST 
