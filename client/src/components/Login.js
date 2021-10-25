@@ -24,7 +24,6 @@ function Login() {
       });
   };
 
-  //NOT WORKING YET
   const logOut = () => {
     fetch("/logout", { method: "DELETE" }).then(() =>
       console.log("logged out")
