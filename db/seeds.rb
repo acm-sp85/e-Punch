@@ -21,7 +21,8 @@ puts '☕  ☕  ☕  Seeding coffee shops... ☕  ☕  ☕ '
     name: Faker::Name.name,
     user_name: Faker::Internet.email,
     address: Faker::Address.full_address,
-    contact: Faker::PhoneNumber.cell_phone)}
+    contact: Faker::PhoneNumber.cell_phone,
+    password: "password")}
     
 puts '👨  👩  Seeding customers... 👨  👩 '
 
