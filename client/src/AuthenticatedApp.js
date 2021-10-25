@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 
 function AuthenticatedApp() {
   const [user, setUser] = useState("");
+  const history = useHistory();
 
   const logOut = () => {
     fetch("/logout", { method: "DELETE" }).then(() => {
       setUser("");
-      this.props.history.push("/login");
+      history.push("/login");
     });
   };
 

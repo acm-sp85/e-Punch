@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import "../App.css";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const history = useHistory();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -22,12 +24,14 @@ function Login() {
       .then((shops) => {
         console.log(shops);
       });
+    history.push("/");
   };
 
   const logOut = () => {
-    fetch("/logout", { method: "DELETE" }).then(() =>
-      console.log("logged out")
-    );
+    fetch("/logout", { method: "DELETE" }).then(() => {
+      console.log("logged out");
+      history.push("/login");
+    });
   };
 
   return (
