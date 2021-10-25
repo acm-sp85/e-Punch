@@ -8,7 +8,7 @@ include CurrentUserConcern
               # .try(:authenticate, params["coffee_shop"]["password"])
   
       if coffee_shop&.authenticate(params[:password])
-        session[:coffee_shop_id] = coffee_shop.id
+        session[:user_id] = coffee_shop.id
         render json: coffee_shop, status: :ok
 
       else
@@ -16,21 +16,11 @@ include CurrentUserConcern
       end
     end
 
-    def logged_in
-        if session[:coffee_shop_id] 
-            render json: {
-                logged_in: true,
-                coffee_shop: coffee_shop_id
-            }
-        else
-            render json: {error: "moscatel"}, status: :unauthorized
-        end
-    end
+
 
 
     def logout
-      # reset_session
-        session.delete :coffee_shop_id
+        session[:user_id] = nil
         render json: { status: 200, logged_out: true}
     end
 

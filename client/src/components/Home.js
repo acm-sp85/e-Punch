@@ -8,6 +8,7 @@ function Fetching() {
   const [coffee_shops, setCoffee_shops] = useState([]);
   const [punch_cards, setPunch_cards] = useState([]);
   const [customers, setCustomers] = useState([]);
+  const [user, setUser] = useState("");
 
   useEffect(() => {
     // Update the document title using the browser API
@@ -29,19 +30,27 @@ function Fetching() {
         // console.log(customers);
         setCustomers(customers);
       });
-    fetch("/me")
+    fetch("/me", {
+      credentials: "include",
+    })
       .then((response) => response.json())
       .then((me) => {
-        console.log(me);
+        console.log(me.user.user_name);
+        setUser(me.user.user_name);
       });
   }, []);
   //   return coffee_shops.map((shop) => <p key={shop.id}>{shop.name}</p>);
-  return (
-    <div>
-      <RenderList list={customers} />
-      <p>CAFETERIAS</p>
-      <RenderList list={coffee_shops} />
-    </div>
-  );
+
+  if (user) {
+    return <p>{user}</p>;
+  } else {
+    return (
+      <div>
+        <RenderList list={customers} />
+        <p>CAFETERIAS</p>
+        <RenderList list={coffee_shops} />
+      </div>
+    );
+  }
 }
 export default Fetching;

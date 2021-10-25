@@ -24,6 +24,13 @@ function Login() {
       });
   };
 
+  //NOT WORKING YET
+  const logOut = () => {
+    fetch("/logout", { method: "DELETE" }).then(() =>
+      console.log("logged out")
+    );
+  };
+
   return (
     <div>
       <h1>LOGIN</h1>
@@ -42,6 +49,7 @@ function Login() {
         />
         <button type="submit">LOGIN</button>
       </form>
+      <button onClick={logOut}>Logout</button>
     </div>
   );
 }

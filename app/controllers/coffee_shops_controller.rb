@@ -20,19 +20,29 @@ class CoffeeShopsController < ApplicationController
             render json: {error: "Coffee shop not logged in"} , status: :not_found
           end
       end
+
+      def logged_in
+        if session[:user_id] 
+            render json: {
+                logged_in: true,
+                user: coffee_shop
+            }
+        else
+            render json: {error: "moscatel"}, status: :unauthorized
+        end
+    end
       
 
 
 
 
       def create
-        shop = CoffeeShop.create!(shop_params)
+        shop = CoffeeShop.create(shop_params)
         if shop.valid?
         session[:shop_id] = shop.id
         render json: shop, status: :created
         else
-          render json: {error: "can you hear me?"}, status: :unprocessable_entity
-          # render json: {errors: shop.errors.full_messages}, status: :unprocessable_entity
+          render json: {errors: shop.errors.full_messages}, status: :unprocessable_entity 
         end
         
       end

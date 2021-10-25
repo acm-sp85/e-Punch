@@ -5,8 +5,8 @@ Rails.application.routes.draw do
   resources :coffee_shops
   resources :sessions, only: [:create]
   resources :registrations, only: [:create]
-  delete :logout, to: "sessions#logout"
-  get :logged_in, to: "sessions#logged_in"
+  # delete :logout, to: "sessions#logout"
+  # get :logged_in, to: "sessions#logged_in"
   root to: "static#home"
 
   
@@ -26,7 +26,7 @@ Rails.application.routes.draw do
   # get "/cards", to: "punch_cards#index"
   # get "/cards/:id", to: "punch_cards#show"
 
-  get "/me", to: "sessions#logged_in"
+  get "/me", to: "coffee_shops#logged_in"
   post "/login", to: "sessions#create"
   delete "/logout", to: "sessions#logout"
 

@@ -5,8 +5,9 @@ class ApplicationController < ActionController::API
 
   private
 
-  def current_coffe_shop
-    @current_coffe_shop ||= CoffeeShop.find_by_id(session[:coffee_shop_id])
+  def coffee_shop
+    @coffee_shop ||= CoffeeShop.find_by_id(session[:user_id])
+    # @coffee_shop = CoffeeShop.last
   end
 
 end
