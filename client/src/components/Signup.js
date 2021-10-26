@@ -22,11 +22,12 @@ function Signup({ setCurrentUser }) {
 
     fetch("/coffee_shops", requestOptions)
       .then((response) => response.json())
-      .then((shops) => {
-        console.log(shops);
+      .then((shop) => {
+        console.log(shop);
+        setCurrentUser(shop);
+        history.push("/customers");
         // setCurrentUser(shops);
       });
-    history.push("/customers");
   };
 
   return (

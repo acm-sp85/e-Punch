@@ -12,6 +12,6 @@
     "start": "PORT=4000 react-scripts start"
   },
   "dependencies": {
-
+    "axios": "^0.24.0"
   }
 }

@@ -1,29 +1,24 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Switch, Route, useHistory, Link } from "react-router-dom";
-// import RenderList from "./components/RenderList";
+import RenderList from "./components/RenderList";
+const axios = require("axios");
 
-function AuthenticatedApp({}) {
-  // const [user, setUser] = useState(null);
-  // const [id, setId] = useState(null);
-  // const [punchCards, setPunchCards] = useState(null);
+function AuthenticatedApp({ currentUser, setCurrentUser }) {
+  const [punchCards, setPunchCards] = useState(null);
   const history = useHistory();
 
-  // setUser(currentUser.user.user_name);
-  // setId(currentUser.user.id);
-  // setPunchCards(currentUser.user.punch_cards);
-
-  useEffect(() => {
-    fetch("/coffee_shops/1")
-      .then((response) => response.json())
-      .then((shops) => {
-        console.log(shops.punch_cards);
-      });
-    console.log("used FX");
-  });
+  async function getUser() {
+    try {
+      const response = await axios.get("/coffee_shops/1");
+      setPunchCards(response.data.punch_cards);
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   const logOut = () => {
     fetch("/logout", { method: "DELETE" }).then(() => {
-      // setUser("");
+      setCurrentUser(null);
       history.push("/");
     });
   };
@@ -36,15 +31,16 @@ function AuthenticatedApp({}) {
           </h3>
         </span>
         <span>
-          {/* Logged in as {currentUser.user.name}{" "} */}
+          <p>{currentUser.name}</p>
           <button onClick={logOut}>Logout</button>
+          <button onClick={getUser}>Show list of clients</button>
         </span>
       </nav>
       <div className="App">
         <Switch>
           <Route path="/customers">
-            {/* <RenderList list={punchCards} /> */}
-            <p>hola</p>
+            <p>hola {currentUser.name}</p>
+            {punchCards ? <RenderList list={punchCards} /> : <div></div>}
           </Route>
         </Switch>
       </div>
