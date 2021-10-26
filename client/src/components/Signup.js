@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { useHistory, Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import "../App.css";
 
 function Signup({ setCurrentUser }) {
@@ -24,6 +24,7 @@ function Signup({ setCurrentUser }) {
       .then((response) => response.json())
       .then((shops) => {
         console.log(shops);
+        // setCurrentUser(shops);
       });
     history.push("/customers");
   };

@@ -24,8 +24,8 @@ function Login({ setCurrentUser }) {
       .then((response) => response.json())
       .then((user) => {
         setCurrentUser(user);
-      })
-      .then(history.push("/customers"));
+        history.push("/customers");
+      });
   };
 
   const logOut = () => {

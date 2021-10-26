@@ -1,34 +1,29 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { Switch, Route, useHistory, Link } from "react-router-dom";
-import RenderList from "./components/RenderList";
+// import RenderList from "./components/RenderList";
 
-function AuthenticatedApp({ currentUser, setCurrentUser }) {
-  const [user, setUser] = useState("");
-  const [id, setId] = useState("");
-  const [punchCards, setPunchCards] = useState([]);
+function AuthenticatedApp({}) {
+  // const [user, setUser] = useState(null);
+  // const [id, setId] = useState(null);
+  // const [punchCards, setPunchCards] = useState(null);
   const history = useHistory();
 
+  // setUser(currentUser.user.user_name);
+  // setId(currentUser.user.id);
+  // setPunchCards(currentUser.user.punch_cards);
+
   useEffect(() => {
-    fetch("/me", {
-      credentials: "include",
-    })
+    fetch("/coffee_shops/1")
       .then((response) => response.json())
-      .then((me) => {
-        console.log(me.user.user_name);
-        setUser(me.user.user_name);
-        setId(me.user.id);
+      .then((shops) => {
+        console.log(shops.punch_cards);
       });
-    fetch(`/coffee_shops/${currentUser.user.id}/punch_cards`)
-      .then((response) => response.json())
-      .then((data) => {
-        setPunchCards(data.punch_cards);
-        console.log(data);
-      });
-  }, []);
+    console.log("used FX");
+  });
 
   const logOut = () => {
     fetch("/logout", { method: "DELETE" }).then(() => {
-      setUser("");
+      // setUser("");
       history.push("/");
     });
   };
@@ -41,13 +36,15 @@ function AuthenticatedApp({ currentUser, setCurrentUser }) {
           </h3>
         </span>
         <span>
-          Logged in as {user} <button onClick={logOut}>Logout</button>
+          {/* Logged in as {currentUser.user.name}{" "} */}
+          <button onClick={logOut}>Logout</button>
         </span>
       </nav>
       <div className="App">
         <Switch>
           <Route path="/customers">
             {/* <RenderList list={punchCards} /> */}
+            <p>hola</p>
           </Route>
         </Switch>
       </div>

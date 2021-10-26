@@ -3,9 +3,6 @@ import { BrowserRouter as Router } from "react-router-dom";
 import "./App.css";
 import AuthenticatedApp from "./AuthenticatedApp";
 import UnauthenticatedApp from "./UnauthenticatedApp";
-// import Login from "./components/Login";
-// import Signup from "./components/Signup";
-// import Home from "./Home";
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
@@ -19,6 +16,7 @@ function App() {
         res.json().then((user) => {
           setCurrentUser(user);
           setAuthChecked(true);
+          console.log(user);
         });
       } else {
         setAuthChecked(true);
