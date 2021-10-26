@@ -4,11 +4,21 @@ import RenderList from "./components/RenderList";
 
 function AuthenticatedApp({ currentUser, setCurrentUser }) {
   const [user, setUser] = useState("");
+  const [id, setId] = useState("");
   const [punchCards, setPunchCards] = useState([]);
   const history = useHistory();
 
   useEffect(() => {
-    fetch(`/coffee_shops/${currentUser.user.id}`)
+    fetch("/me", {
+      credentials: "include",
+    })
+      .then((response) => response.json())
+      .then((me) => {
+        console.log(me.user.user_name);
+        setUser(me.user.user_name);
+        setId(me.user.id);
+      });
+    fetch(`/coffee_shops/${currentUser.user.id}/punch_cards`)
       .then((response) => response.json())
       .then((data) => {
         setPunchCards(data.punch_cards);
@@ -37,7 +47,7 @@ function AuthenticatedApp({ currentUser, setCurrentUser }) {
       <div className="App">
         <Switch>
           <Route path="/customers">
-            <RenderList list={punchCards} />
+            {/* <RenderList list={punchCards} /> */}
           </Route>
         </Switch>
       </div>

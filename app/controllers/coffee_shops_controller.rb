@@ -1,6 +1,7 @@
 class CoffeeShopsController < ApplicationController
+  before_action :check_authorization
   before_action :set_coffee_shop, only: [:show, :update, :destroy, :show_customers, :show_punch_cards,:password, :password_confirmation]
-    def index
+  def index
         shops = CoffeeShop.all
         render json: shops, each_serializer: CoffeeShopSerializer
       end
@@ -90,5 +91,7 @@ class CoffeeShopsController < ApplicationController
       def set_coffee_shop
         @coffee_shop = CoffeeShop.find_by(id: params[:id])
       end
-      
+      def check_authorization
+        return render json: { error: "must be logged in!"} , status: :unauthorized unless coffee_shop
+      end
 end
