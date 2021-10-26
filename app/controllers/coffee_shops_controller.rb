@@ -28,7 +28,7 @@ class CoffeeShopsController < ApplicationController
                 user: coffee_shop
             }
         else
-            render json: {error: "moscatel"}, status: :unauthorized
+            render json: {error: "User not logged in"}, status: :unauthorized
         end
     end
       

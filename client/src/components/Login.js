@@ -24,9 +24,8 @@ function Login({ setCurrentUser }) {
       .then((response) => response.json())
       .then((user) => {
         setCurrentUser(user);
-        history.push("/customers");
-        // setAuthChecked(true);
-      });
+      })
+      .then(history.push("/customers"));
   };
 
   const logOut = () => {
@@ -53,10 +52,10 @@ function Login({ setCurrentUser }) {
           onChange={(e) => setPassword(e.target.value)}
         />
         <button type="submit">LOGIN</button>
-        <p>
-          <Link to="/signup">Sign Up</Link>
-        </p>
       </form>
+      <p>
+        <Link to="/signup">Sign Up</Link>
+      </p>
       <button onClick={logOut}>Logout</button>
     </div>
   );
