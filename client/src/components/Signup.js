@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
+import { useHistory, Link } from "react-router-dom";
 import "../App.css";
 
-function Signup() {
+function Signup({ setCurrentUser }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
@@ -24,6 +25,7 @@ function Signup() {
       .then((shops) => {
         console.log(shops);
       });
+    history.push("/customers");
   };
 
   return (
@@ -49,6 +51,9 @@ function Signup() {
           onChange={(e) => setPasswordConfirmation(e.target.value)}
         />
         <button type="submit">SIGNUP</button>
+        <p>
+          <Link to="/login">Log in</Link>
+        </p>
       </form>
     </div>
   );

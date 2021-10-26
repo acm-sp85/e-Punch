@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
+import { BrowserRouter as Router } from "react-router-dom";
 import "./App.css";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Login from "./components/Login";
-import Signup from "./components/Signup";
-import Home from "./Home";
+import AuthenticatedApp from "./AuthenticatedApp";
+import UnauthenticatedApp from "./UnauthenticatedApp";
+// import Login from "./components/Login";
+// import Signup from "./components/Signup";
+// import Home from "./Home";
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
@@ -30,11 +32,14 @@ function App() {
 
   return (
     <Router>
-      <Switch>
-        <Route exact path="/" component={Home} />
-        <Route exact path="/login" component={Login} />
-        <Route exact path="/signup" component={Signup} />
-      </Switch>
+      {currentUser ? (
+        <AuthenticatedApp
+          setCurrentUser={setCurrentUser}
+          currentUser={currentUser}
+        />
+      ) : (
+        <UnauthenticatedApp setCurrentUser={setCurrentUser} />
+      )}
     </Router>
   );
 }
