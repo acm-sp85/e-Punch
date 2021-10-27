@@ -326,3 +326,5 @@ For additional support, check out these guides on Heroku:
 ---
 
 install axios
+npm install bootstrap
+npm start --prefix client

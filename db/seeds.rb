@@ -17,7 +17,7 @@ PunchCard.destroy_all
 
 puts '☕  ☕  ☕  Seeding coffee shops... ☕  ☕  ☕ '
 
-5.times {CoffeeShop.create(
+15.times {CoffeeShop.create(
     name: Faker::Name.name,
     user_name: Faker::Internet.email,
     address: Faker::Address.full_address,
@@ -26,7 +26,7 @@ puts '☕  ☕  ☕  Seeding coffee shops... ☕  ☕  ☕ '
     
 puts '👨  👩  Seeding customers... 👨  👩 '
 
-20.times {Customer.create(
+30.times {Customer.create(
     name: Faker::Name.name,
     contact: Faker::PhoneNumber.cell_phone,
     user_name:Faker::Internet.email
@@ -35,8 +35,8 @@ puts '👨  👩  Seeding customers... 👨  👩 '
     
 puts '💳  💳  💳  Seeding punch cards... 💳  💳  💳 ' 
 
-20.times {PunchCard.create(
-    coffee_shop_id: rand(1..5),
+50.times {PunchCard.create(
+    coffee_shop_id: rand(1..10),
     customer_id: rand(1..20)
    
 )}

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import "bootstrap/dist/css/bootstrap.css";
 import { BrowserRouter as Router } from "react-router-dom";
 import "./App.css";
 import AuthenticatedApp from "./AuthenticatedApp";

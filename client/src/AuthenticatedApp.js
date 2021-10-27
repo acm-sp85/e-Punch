@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Switch, Route, useHistory, Link } from "react-router-dom";
 import RenderList from "./components/RenderList";
 const axios = require("axios");
