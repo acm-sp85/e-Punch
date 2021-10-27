@@ -9,7 +9,7 @@ function AuthenticatedApp({ currentUser, setCurrentUser }) {
 
   async function getUser() {
     try {
-      const response = await axios.get("/coffee_shops/1");
+      const response = await axios.get(`/coffee_shops/${currentUser.id}`);
       setPunchCards(response.data.punch_cards);
     } catch (error) {
       console.error(error);
