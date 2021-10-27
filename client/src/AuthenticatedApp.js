@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { Switch, Route, useHistory, Link } from "react-router-dom";
 import RenderList from "./components/RenderList";
+import IssueCard from "./components/IssueCard";
 const axios = require("axios");
 
 function AuthenticatedApp({ currentUser, setCurrentUser }) {
   const [punchCards, setPunchCards] = useState(null);
+  const [toggleIssuingForm, setToggleIssuingForm] = useState(false);
   const history = useHistory();
 
   async function getUser() {
@@ -22,6 +24,10 @@ function AuthenticatedApp({ currentUser, setCurrentUser }) {
       history.push("/");
     });
   };
+
+  const displayIssuingForm = () => {
+    setToggleIssuingForm(!toggleIssuingForm);
+  };
   return (
     <div>
       <nav>
@@ -35,6 +41,7 @@ function AuthenticatedApp({ currentUser, setCurrentUser }) {
           <button onClick={logOut}>Logout</button>
           <button onClick={getUser}>Show list of clients</button>
           <button onClick>Your profile</button>
+          <button onClick={displayIssuingForm}>Issue a card</button>
         </span>
       </nav>
       <div className="App">
@@ -42,6 +49,14 @@ function AuthenticatedApp({ currentUser, setCurrentUser }) {
           <Route path="/customers">
             <p>hola {currentUser.name}</p>
             {punchCards ? <RenderList list={punchCards} /> : <div></div>}
+            {toggleIssuingForm ? (
+              <IssueCard
+                setCurrentUser={setCurrentUser}
+                currentUser={currentUser}
+              />
+            ) : (
+              <div></div>
+            )}
           </Route>
         </Switch>
       </div>

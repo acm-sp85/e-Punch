@@ -2,6 +2,7 @@ class CoffeeShopsController < ApplicationController
   before_action :check_authorization, except: [:create]
   before_action :set_coffee_shop, only: [:show, :update, :destroy, :show_customers, :show_punch_cards,:password, :password_confirmation]
   def index
+
         shops = CoffeeShop.all
         render json: shops, each_serializer: CoffeeShopSerializer
       end

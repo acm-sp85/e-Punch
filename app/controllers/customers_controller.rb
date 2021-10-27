@@ -1,11 +1,12 @@
 class CustomersController < ApplicationController
   before_action :set_customer, only: [:show, :update, :destroy, :show_punch_cards, :show_coffee_shops]
     def index
-        customers = Customer.all
-        render json: customers, each_serializer: CustomerSerializer
-      end
+      customers = Customer.all
+      render json: customers, each_serializer: CustomerSerializer
+    end
+    
+    def show
 
-      def show
         if @customer 
           render json: @customer, status: :ok
           else

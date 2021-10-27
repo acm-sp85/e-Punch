@@ -1,13 +1,11 @@
 class SessionsController < ApplicationController
-include CurrentUserConcern
+# include CurrentUserConcern
 
 
     def create
-      coffee_shop = CoffeeShop
-              .find_by(user_name: params["user_name"])
-              # .try(:authenticate, params["coffee_shop"]["password"])
-  
-      if coffee_shop&.authenticate(params[:password])
+      coffee_shop = CoffeeShop.find_by(user_name: params[:user_name])
+              if coffee_shop&.authenticate(params[:password])
+                byebug
         session[:user_id] = coffee_shop.id
         render json: coffee_shop, status: :ok
 

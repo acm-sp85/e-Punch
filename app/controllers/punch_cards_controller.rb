@@ -1,7 +1,12 @@
 class PunchCardsController < ApplicationController
   before_action :set_punch, only: [:show, :update, :destroy]
     def index
+
+      if params[:coffee_shop_id]
+        cards = PunchCard.where(coffee_shop_id: params[:coffee_shop_id])
+      else
         cards = PunchCard.all
+      end
         render json: cards, each_serializer: PunchCardSerializer
       end
 
