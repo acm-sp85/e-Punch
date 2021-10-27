@@ -31,9 +31,10 @@ function AuthenticatedApp({ currentUser, setCurrentUser }) {
           </h3>
         </span>
         <span>
-          <p>{currentUser.name}</p>
+          <p>You are signed in as {currentUser.name}</p>
           <button onClick={logOut}>Logout</button>
           <button onClick={getUser}>Show list of clients</button>
+          <button onClick>Your profile</button>
         </span>
       </nav>
       <div className="App">

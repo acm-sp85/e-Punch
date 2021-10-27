@@ -6,6 +6,9 @@ function Signup({ setCurrentUser }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
+  const [name, setName] = useState("");
+  const [address, setAddress] = useState("");
+  const [description, setDescription] = useState("");
   const history = useHistory();
 
   const handleSubmit = (e) => {
@@ -18,6 +21,9 @@ function Signup({ setCurrentUser }) {
         user_name: email,
         password: password,
         password_confirmation: passwordConfirmation,
+        name: name,
+        address: address,
+        description: description,
       }),
     };
 
@@ -37,13 +43,32 @@ function Signup({ setCurrentUser }) {
       <form onSubmit={handleSubmit}>
         <input
           type="text"
+          placeholder="Name..."
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
+        <input
+          type="text"
           placeholder="Email..."
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
+
+        <input
+          type="text"
+          placeholder="Description..."
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+        />
+        <input
+          type="text"
+          placeholder="Address..."
+          value={address}
+          onChange={(e) => setAddress(e.target.value)}
+        />
         <input
           type="password"
-          placeholder="Password..."
+          placeholder="Confirm Password..."
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
