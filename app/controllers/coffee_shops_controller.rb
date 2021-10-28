@@ -25,10 +25,8 @@ class CoffeeShopsController < ApplicationController
 
       def logged_in
         if session[:user_id] 
-            render json: {
-                logged_in: true,
-                user: coffee_shop
-            }
+            render json: coffee_shop
+            
         else
             render json: {error: "User not logged in"}, status: :unauthorized
         end

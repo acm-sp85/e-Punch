@@ -14,12 +14,12 @@ function renderingList(props) {
             />
             <div className="card-body">
               <h5 className="card-title">{item.customer_name}</h5>
-              <p className="card-text">
-                Some quick example text to build on the card title and make up
-                the bulk of the card's content.
-              </p>
+              <p className="card-text">{item.counter} / 10</p>
               <a href="#" className="btn btn-primary">
-                Issue a new punch card
+                Reset
+              </a>
+              <a href="#" className="btn btn-primary">
+                Issue new one
               </a>
             </div>
           </div>

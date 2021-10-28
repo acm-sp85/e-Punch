@@ -5,46 +5,21 @@ import IssueCard from "./components/IssueCard";
 // const axios = require("axios");
 
 function AuthenticatedApp({ currentUser, setCurrentUser }) {
-  const [punchCards, setPunchCards] = useState(null);
+  const [punchCards, setPunchCards] = useState([]);
   const [toggleIssuingForm, setToggleIssuingForm] = useState(false);
   const [toggleCustomerList, setToggleCustomerList] = useState(false);
   const history = useHistory();
-
-  // async function getUser() {
-  //   setToggleCustomerList(!toggleCustomerList);
-  //   if (toggleCustomerList) {
-  //     try {
-  //       const response = await axios.get(`/coffee_shops/${currentUser.id}`, {
-  //         withCredentials: true,
-  //       });
-  //       setPunchCards(response.data.punch_cards);
-  //     } catch (error) {
-  //       console.error(error);
-  //     }
-  //   }
-  // }
-
-  const getUser = () => {
-    if (toggleCustomerList) {
-      fetch("/coffee_shops/${currentUser.id}", {
-        credentials: "include",
-      }).then((res) => {
-        if (res.ok) {
-          res.json().then((response) => {
-            setPunchCards(response.data.punch_cards);
-          });
-        } else {
-          console.log("not cutting it");
-        }
-      });
-    }
-  };
 
   const logOut = () => {
     fetch("/logout", { method: "DELETE" }).then(() => {
       setCurrentUser(null);
       history.push("/");
     });
+  };
+
+  const getUser = () => {
+    setToggleCustomerList(!toggleCustomerList);
+    setPunchCards(currentUser.punch_cards);
   };
 
   const displayIssuingForm = () => {
@@ -61,7 +36,7 @@ function AuthenticatedApp({ currentUser, setCurrentUser }) {
         <span>
           <p>You are signed in as {currentUser.name}</p>
           <button onClick={logOut}>Logout</button>
-          <button onClick={getUser}>Show list of clients</button>
+          <button onClick={getUser}>Show list of punch cards</button>
           <button onClick>Your profile</button>
           <button onClick={displayIssuingForm}>Issue a card</button>
         </span>
@@ -70,7 +45,7 @@ function AuthenticatedApp({ currentUser, setCurrentUser }) {
         <Switch>
           <Route path="/customers">
             <p>hola {currentUser.name}</p>
-            {punchCards && toggleCustomerList ? (
+            {toggleCustomerList ? (
               <RenderList list={punchCards} />
             ) : (
               <div></div>

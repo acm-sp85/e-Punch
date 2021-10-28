@@ -37,7 +37,8 @@ puts '💳  💳  💳  Seeding punch cards... 💳  💳  💳 '
 
 50.times {PunchCard.create(
     coffee_shop_id: rand(1..10),
-    customer_id: rand(1..20)
+    customer_id: rand(1..20),
+    counter: rand(1..9)
    
 )}
 

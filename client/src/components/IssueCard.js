@@ -8,41 +8,41 @@ function Signup({ currentUser, setCurrentUser }) {
   const [customer, setCustomer] = useState("");
   const history = useHistory();
 
-  //   const handleSubmit = (e) => {
-  //     e.preventDefault();
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
 
-  //     const requestOptionsCustomer = {
-  //       method: "POST",
-  //       headers: { "Content-Type": "application/json" },
-  //       body: JSON.stringify({
-  //         user_name: email,
-  //         name: name,
-  //       }),
-  //     };
-  //     const requestOptionsCard = {
-  //       method: "POST",
-  //       headers: { "Content-Type": "application/json" },
-  //       body: JSON.stringify({
-  //         coffee_shop_id: currentUser.id,
-  //         customer_id: customer.id,
-  //         counter: 0,
-  //       }),
-  //     };
-
-  //     fetch("/customers", requestOptionsCustomer)
-  //       .then((response) => response.json())
-  //       .then((customer) => {
-  //         setCustomer(customer);
-  //         console.log(customer);
-  //       })
-  //       .then(
-  //         fetch("/punch_cards", requestOptionsCard)
-  //           .then((response) => response.json())
-  //           .then((new_card) => {
-  //             console.log(new_card);
-  //           })
-  //       );
+  //   const requestOptionsCustomer = {
+  //     method: "POST",
+  //     headers: { "Content-Type": "application/json" },
+  //     body: JSON.stringify({
+  //       user_name: email,
+  //       name: name,
+  //     }),
   //   };
+  //   const requestOptionsCard = {
+  //     method: "POST",
+  //     headers: { "Content-Type": "application/json" },
+  //     body: JSON.stringify({
+  //       coffee_shop_id: currentUser.id,
+  //       customer_id: customer.id,
+  //       counter: 0,
+  //     }),
+  //   };
+
+  //   fetch("/customers", requestOptionsCustomer)
+  //     .then((response) => response.json())
+  //     .then((customer) => {
+  //       setCustomer(customer);
+  //       console.log(customer);
+  //     })
+  //     .then(
+  //       fetch("/punch_cards", requestOptionsCard)
+  //         .then((response) => response.json())
+  //         .then((new_card) => {
+  //           console.log(new_card);
+  //         })
+  //     );
+  // };
 
   return (
     <div>
