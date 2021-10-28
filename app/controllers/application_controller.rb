@@ -6,8 +6,9 @@ class ApplicationController < ActionController::API
   private
 
   def coffee_shop
-    @coffee_shop ||= CoffeeShop.find_by_id(session[:shop_id])
-    # @coffee_shop = CoffeeShop.last
+
+    @coffee_shop ||= CoffeeShop.find_by_id(session[:shop_id]) if session[:shop_id]
+    # @coffee_shop = CoffeeShop.first
   end
 
 end

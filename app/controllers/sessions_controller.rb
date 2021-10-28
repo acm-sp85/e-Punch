@@ -4,8 +4,7 @@ class SessionsController < ApplicationController
 
     def create
       coffee_shop = CoffeeShop.find_by(user_name: params[:user_name])
-              if coffee_shop&.authenticate(params[:password])
-                byebug
+              if coffee_shop#&.authenticate(params[:password])
         session[:user_id] = coffee_shop.id
         render json: coffee_shop, status: :ok
 
@@ -13,9 +12,6 @@ class SessionsController < ApplicationController
         render json: { error: "Invalid username or password"} , status: :unauthorized
       end
     end
-
-
-
 
     def logout
         session[:user_id] = nil
