@@ -8,6 +8,7 @@ function AuthenticatedApp({ currentUser, setCurrentUser }) {
   const [punchCards, setPunchCards] = useState([]);
   const [toggleIssuingForm, setToggleIssuingForm] = useState(false);
   const [toggleCustomerList, setToggleCustomerList] = useState(false);
+  const [toggleProfile, setToggleProfile] = useState(false);
   const history = useHistory();
 
   const logOut = () => {
@@ -18,12 +19,22 @@ function AuthenticatedApp({ currentUser, setCurrentUser }) {
   };
 
   const getUser = () => {
+    setToggleIssuingForm(false);
+    setToggleProfile(false);
     setToggleCustomerList(!toggleCustomerList);
     setPunchCards(currentUser.punch_cards);
   };
 
   const displayIssuingForm = () => {
+    setToggleCustomerList(false);
+    setToggleProfile(false);
     setToggleIssuingForm(!toggleIssuingForm);
+  };
+
+  const displayProfile = () => {
+    setToggleCustomerList(false);
+    setToggleIssuingForm(false);
+    setToggleProfile(!toggleProfile);
   };
 
   return (
@@ -38,14 +49,13 @@ function AuthenticatedApp({ currentUser, setCurrentUser }) {
           <p>You are signed in as {currentUser.name}</p>
           <button onClick={logOut}>Logout</button>
           <button onClick={getUser}>Show list of punch cards</button>
-          <button onClick>Your profile</button>
+          <button onClick={displayProfile}>Your profile</button>
           <button onClick={displayIssuingForm}>Issue a card</button>
         </span>
       </nav>
       <div className="App">
         <Switch>
           <Route path="/customers">
-            <p>hola {currentUser.name}</p>
             {toggleCustomerList ? (
               <RenderList list={punchCards} />
             ) : (
@@ -56,6 +66,17 @@ function AuthenticatedApp({ currentUser, setCurrentUser }) {
                 setCurrentUser={setCurrentUser}
                 currentUser={currentUser}
               />
+            ) : (
+              <div></div>
+            )}
+            {toggleProfile ? (
+              <div>
+                <p>{currentUser.name}</p>
+                <p>{currentUser.address}</p>
+                <p>{currentUser.contact}</p>
+                <p>{currentUser.description}</p>
+                <p>{currentUser.user_name}</p>
+              </div>
             ) : (
               <div></div>
             )}

@@ -54,21 +54,18 @@ function renderingList(props) {
               <a
                 href="#"
                 className="btn btn-primary"
-                onClick={resetCounter}
-                id={item.id}
-              >
-                Reset
-              </a>
-              <a
-                href="#"
-                className="btn btn-primary"
                 onClick={punchCard}
                 id={item.id}
               >
                 PUNCH
               </a>
-              <a href="#" className="btn btn-primary" id={item.id}>
-                Issue new one
+              <a
+                href="#"
+                className="btn btn-primary"
+                onClick={resetCounter}
+                id={item.id}
+              >
+                Reset
               </a>
             </div>
           </div>
