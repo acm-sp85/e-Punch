@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import "../App.css";
 
-function Signup({ setCurrentUser }) {
+function Signup({ currentUser, setCurrentUser }) {
+  const [user, setUser] = useState(currentUser.id);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");

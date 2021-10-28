@@ -2,21 +2,43 @@ import React, { useState } from "react";
 import { Switch, Route, useHistory, Link } from "react-router-dom";
 import RenderList from "./components/RenderList";
 import IssueCard from "./components/IssueCard";
-const axios = require("axios");
+// const axios = require("axios");
 
 function AuthenticatedApp({ currentUser, setCurrentUser }) {
   const [punchCards, setPunchCards] = useState(null);
   const [toggleIssuingForm, setToggleIssuingForm] = useState(false);
+  const [toggleCustomerList, setToggleCustomerList] = useState(false);
   const history = useHistory();
 
-  async function getUser() {
-    try {
-      const response = await axios.get(`/coffee_shops/${currentUser.id}`);
-      setPunchCards(response.data.punch_cards);
-    } catch (error) {
-      console.error(error);
+  // async function getUser() {
+  //   setToggleCustomerList(!toggleCustomerList);
+  //   if (toggleCustomerList) {
+  //     try {
+  //       const response = await axios.get(`/coffee_shops/${currentUser.id}`, {
+  //         withCredentials: true,
+  //       });
+  //       setPunchCards(response.data.punch_cards);
+  //     } catch (error) {
+  //       console.error(error);
+  //     }
+  //   }
+  // }
+
+  const getUser = () => {
+    if (toggleCustomerList) {
+      fetch("/coffee_shops/${currentUser.id}", {
+        credentials: "include",
+      }).then((res) => {
+        if (res.ok) {
+          res.json().then((response) => {
+            setPunchCards(response.data.punch_cards);
+          });
+        } else {
+          console.log("not cutting it");
+        }
+      });
     }
-  }
+  };
 
   const logOut = () => {
     fetch("/logout", { method: "DELETE" }).then(() => {
@@ -48,7 +70,11 @@ function AuthenticatedApp({ currentUser, setCurrentUser }) {
         <Switch>
           <Route path="/customers">
             <p>hola {currentUser.name}</p>
-            {punchCards ? <RenderList list={punchCards} /> : <div></div>}
+            {punchCards && toggleCustomerList ? (
+              <RenderList list={punchCards} />
+            ) : (
+              <div></div>
+            )}
             {toggleIssuingForm ? (
               <IssueCard
                 setCurrentUser={setCurrentUser}
