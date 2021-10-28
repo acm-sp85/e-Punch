@@ -27,6 +27,8 @@ Rails.application.routes.draw do
 
   post "/signup", to: "coffee_shops#create"
 
+  post "/punch_cards/:id/update", to: "punch_cards#update"
+
 
   get "/me", to: "coffee_shops#logged_in"
   post "/login", to: "sessions#create"

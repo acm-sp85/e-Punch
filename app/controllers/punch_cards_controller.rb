@@ -43,7 +43,7 @@ class PunchCardsController < ApplicationController
       private
 
       def punch_params
-        params.require(:punch_card).permit(:id, :coffee_shop_id, :customer_id)
+        params.require(:punch_card).permit(:id, :coffee_shop_id, :customer_id, :counter)
       end
 
       def set_punch

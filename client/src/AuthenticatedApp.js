@@ -25,6 +25,7 @@ function AuthenticatedApp({ currentUser, setCurrentUser }) {
   const displayIssuingForm = () => {
     setToggleIssuingForm(!toggleIssuingForm);
   };
+
   return (
     <div>
       <nav>
