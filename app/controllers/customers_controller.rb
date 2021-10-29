@@ -49,7 +49,7 @@ class CustomersController < ApplicationController
           @x = Customer.where("user_name like ?", "%#{params[:user_name]}%")
 
           if @x !=[]
-            render json: @x, status: :ok
+            render json: @x[0], status: :ok
           else 
               render json: {error: "WRONG EMAIL OR NO CUSTOMER"} , status: :not_found
           end

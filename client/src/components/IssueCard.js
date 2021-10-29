@@ -5,7 +5,7 @@ import "../App.css";
 function Signup({ currentUser, setCurrentUser }) {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
-  const [customer, setCustomer] = useState("");
+  const [customerId, setCustomerId] = useState("");
   const [toggleButton, setToggleButton] = useState(false);
   const history = useHistory();
 
@@ -17,7 +17,7 @@ function Signup({ currentUser, setCurrentUser }) {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         coffee_shop_id: currentUser.id,
-        customer_id: customer.id,
+        customer_id: customerId,
         counter: 0,
       }),
     };
@@ -47,7 +47,8 @@ function Signup({ currentUser, setCurrentUser }) {
         }
       })
       .then((user) => {
-        console.log(user);
+        console.log(user.id);
+        setCustomerId(user.id);
       });
   };
 
