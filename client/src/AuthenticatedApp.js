@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Switch, Route, useHistory, Link } from "react-router-dom";
 import RenderList from "./components/RenderList";
 import IssueCard from "./components/IssueCard";
+import CoffeeShopProfile from "./components/CoffeeShopProfile";
 // const axios = require("axios");
 
 function AuthenticatedApp({ currentUser, setCurrentUser }) {
@@ -11,14 +12,15 @@ function AuthenticatedApp({ currentUser, setCurrentUser }) {
   const [toggleProfile, setToggleProfile] = useState(false);
   const history = useHistory();
 
+  //LOGGING OUT USER
   const logOut = () => {
     fetch("/logout", { method: "DELETE" }).then(() => {
       setCurrentUser(null);
       history.push("/");
     });
   };
-
-  const getUser = () => {
+  //GETTING CARD INFORMATION FROM OUR CURRENT USER
+  const getCards = () => {
     setToggleIssuingForm(false);
     setToggleProfile(false);
     setToggleCustomerList(!toggleCustomerList);
@@ -48,7 +50,7 @@ function AuthenticatedApp({ currentUser, setCurrentUser }) {
         <span>
           <p>You are signed in as {currentUser.name}</p>
           <button onClick={logOut}>Logout</button>
-          <button onClick={getUser}>Show list of punch cards</button>
+          <button onClick={getCards}>Show list of punch cards</button>
           <button onClick={displayProfile}>Your profile</button>
           <button onClick={displayIssuingForm}>Issue a card</button>
         </span>
@@ -57,7 +59,7 @@ function AuthenticatedApp({ currentUser, setCurrentUser }) {
         <Switch>
           <Route exact path="/customers">
             {toggleCustomerList ? (
-              <RenderList list={punchCards} />
+              <RenderList cardsList={punchCards} />
             ) : (
               <div></div>
             )}
@@ -70,13 +72,7 @@ function AuthenticatedApp({ currentUser, setCurrentUser }) {
               <div></div>
             )}
             {toggleProfile ? (
-              <div>
-                <p>{currentUser.name}</p>
-                <p>{currentUser.address}</p>
-                <p>{currentUser.contact}</p>
-                <p>{currentUser.description}</p>
-                <p>{currentUser.user_name}</p>
-              </div>
+              <CoffeeShopProfile currentUser={currentUser} />
             ) : (
               <div></div>
             )}

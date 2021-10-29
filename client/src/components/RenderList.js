@@ -2,6 +2,7 @@ import React from "react";
 import "../App.css";
 
 function renderingList(props) {
+  //RESETTING CARD
   const resetCounter = (e) => {
     const punch_card_id = e.target.id;
     const requestOptions = {
@@ -18,9 +19,11 @@ function renderingList(props) {
         console.log(updated);
       });
   };
+
+  //PUNCHING CARD
   const punchCard = (e) => {
     const punch_card_id = e.target.id;
-    const updatedCounter = props.list;
+    const updatedCounter = props.cardsList;
     const counter = updatedCounter.find((card) => card.id == punch_card_id);
 
     const requestOptions = {
@@ -38,6 +41,7 @@ function renderingList(props) {
       });
   };
 
+  //DELETING CARD
   const deleteCard = (e) => {
     const punch_card_id = e.target.id;
     const requestOptions = {
@@ -53,13 +57,13 @@ function renderingList(props) {
 
   return (
     <div>
-      {props.list.map((item) => (
+      {props.cardsList.map((item) => (
         <div key={item.id}>
           <div className="card">
             <img
               src="https://uploads-ssl.webflow.com/6046a7b973c7a186ae5ce9d3/6046a7b973c7a107ee5cea18_Testimonial%20User.svg"
               className="avatar"
-              alt="https://previews.123rf.com/images/asmati/asmati1706/asmati170606229/80944205-user-avatar-illustration-anonymous-sign-vector-white-icon-with-soft-shadow-on-transparent-background.jpg"
+              alt="img not found"
             />
             <div className="card-body">
               <h5 className="card-title">{item.customer_name}</h5>

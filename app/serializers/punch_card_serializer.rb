@@ -1,7 +1,7 @@
 class PunchCardSerializer < ActiveModel::Serializer
   attributes :customer_name, :coffee_shop_name, :id, :counter
-  # belongs_to :coffee_shop
-  # belongs_to :customer
+  belongs_to :coffee_shop
+  belongs_to :customer
 
   def customer_name
     object.customer.name
