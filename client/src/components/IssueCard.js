@@ -6,6 +6,7 @@ function Signup({ currentUser, setCurrentUser }) {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [customer, setCustomer] = useState("");
+  const [toggleButton, setToggleButton] = useState(false);
   const history = useHistory();
 
   const handleSubmit = (e) => {
@@ -30,8 +31,24 @@ function Signup({ currentUser, setCurrentUser }) {
   //NEED TO LOOKUP A CUSTOMER ON OUR CUSTOMERS DB BY THEIR EMAIL. IF IT RETURNS SOMETHING THEN WE WILL ACTIVATE THE ISSUE CARD BUTTON
   const checkCustomer = (e) => {
     e.preventDefault();
-    console.log("Check if customer exists");
-    // fetch(`/customers`)
+
+    const requestUserCheck = {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    };
+
+    fetch(`/customers/find/${email}`, requestUserCheck)
+      .then((response) => {
+        if (response.ok) {
+          setToggleButton(true);
+          return response.json();
+        } else {
+          throw new Error("Something went wrong");
+        }
+      })
+      .then((user) => {
+        console.log(user);
+      });
   };
 
   return (
@@ -46,7 +63,8 @@ function Signup({ currentUser, setCurrentUser }) {
         />
 
         <button onClick={checkCustomer}>Check customer</button>
-        <button type="submit">Issue Card</button>
+
+        {toggleButton ? <button type="submit">Issue Card</button> : <div></div>}
       </form>
     </div>
   );

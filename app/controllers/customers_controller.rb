@@ -12,47 +12,49 @@ class CustomersController < ApplicationController
           else
             render json: {error: "Customer not found"} , status: :not_found
           end
-      end
+        end
+        
+        def create
+          customer = Customer.create!(customer_params)
+          render json: customer, status: :created
+          
+        end
+        
+        def update
+          @customer.update(customer_params)
+          render json: @customer, status: :accepted
+          
+        end
+        
+        def destroy
+          
+          @customer.destroy
+          head :no_content, status: :ok
+        end
+        
+        
+        def show_punch_cards
+          if @customer
+            render json: @customer.punch_cards, status: :ok
+          end
+        end
+        def show_coffee_shops
+          if @customer
+            render json: @customer.coffee_shops, status: :ok
+          end
+        end
+        
+        def find_by_name
+          
+          @x = Customer.where("user_name like ?", "%#{params[:user_name]}%")
 
-      def create
-        customer = Customer.create!(customer_params)
-        render json: customer, status: :created
+          if @x !=[]
+            render json: @x, status: :ok
+          else 
+              render json: {error: "WRONG EMAIL OR NO CUSTOMER"} , status: :not_found
+          end
 
-    end
-
-    def update
-      @customer.update(customer_params)
-      render json: @customer, status: :accepted
-      
-  end
-  
-  def destroy
-      
-    @customer.destroy
-    head :no_content, status: :ok
-  end
-
-
-  def show_punch_cards
-    if @customer
-      render json: @customer.punch_cards, status: :ok
-    end
-  end
-  def show_coffee_shops
-    if @customer
-      render json: @customer.coffee_shops, status: :ok
-    end
-  end
-  
-  def find_by_name
-    # x = Customer.find_by_user_name("xuan@romaguera-lind.co")
-    # byebug
-    # x = Customer.find_by_user_name(params[:user_name])
-    # x = Customer.where("user_name like ?", "%sha.oberbrunne%")
-    x = Customer.where("user_name like ?", "%#{params[:user_name]}%")
-
-    render json: x, status: :ok
-  end
+          end
 
 
 
