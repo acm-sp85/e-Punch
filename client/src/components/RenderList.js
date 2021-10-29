@@ -6,14 +6,14 @@ function renderingList(props) {
   const resetCounter = (e) => {
     const punch_card_id = e.target.id;
     const requestOptions = {
-      method: "POST",
+      method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         counter: 0,
       }),
     };
 
-    fetch(`/punch_cards/${punch_card_id}/update`, requestOptions)
+    fetch(`/punch_cards/${punch_card_id}`, requestOptions)
       .then((response) => response.json())
       .then((updated) => {
         console.log(updated);
@@ -27,14 +27,14 @@ function renderingList(props) {
     const counter = updatedCounter.find((card) => card.id == punch_card_id);
 
     const requestOptions = {
-      method: "POST",
+      method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         counter: counter.counter + 1,
       }),
     };
 
-    fetch(`/punch_cards/${punch_card_id}/update`, requestOptions)
+    fetch(`/punch_cards/${punch_card_id}`, requestOptions)
       .then((response) => response.json())
       .then((updated) => {
         console.log(updated);

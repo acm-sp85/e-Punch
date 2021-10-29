@@ -7,7 +7,7 @@ function CoffeeShopProfile({ currentUser, setCurrentUser }) {
 
   const [name, setName] = useState(currentUser.name);
   const [address, setAddress] = useState(currentUser.address);
-  const [description, setDescription] = useState("");
+  const [description, setDescription] = useState(currentUser.description);
   const coffee_shop_id = useState(currentUser.id);
   const [contact, setContact] = useState(currentUser.contact);
   const [toggleToEdit, setToggleToEdit] = useState(true);

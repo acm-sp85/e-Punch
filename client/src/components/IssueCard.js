@@ -11,14 +11,6 @@ function Signup({ currentUser, setCurrentUser }) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const requestOptionsCustomer = {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        user_name: email,
-        name: name,
-      }),
-    };
     const requestOptionsCard = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -29,19 +21,17 @@ function Signup({ currentUser, setCurrentUser }) {
       }),
     };
 
-    fetch("/customers", requestOptionsCustomer)
+    fetch("/punch_cards", requestOptionsCard)
       .then((response) => response.json())
-      .then((customer) => {
-        console.log(customer);
-        setCustomer(customer);
-      })
-      .then(
-        fetch("/punch_cards", requestOptionsCard)
-          .then((response) => response.json())
-          .then((new_card) => {
-            console.log(new_card);
-          })
-      );
+      .then((new_card) => {
+        console.log(new_card);
+      });
+  };
+  //NEED TO LOOKUP A CUSTOMER ON OUR CUSTOMERS DB BY THEIR EMAIL. IF IT RETURNS SOMETHING THEN WE WILL ACTIVATE THE ISSUE CARD BUTTON
+  const checkCustomer = (e) => {
+    e.preventDefault();
+    console.log("Check if customer exists");
+    // fetch(`/customers`)
   };
 
   return (
@@ -50,21 +40,13 @@ function Signup({ currentUser, setCurrentUser }) {
       <form onSubmit={handleSubmit}>
         <input
           type="text"
-          placeholder="Name..."
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
-        <input
-          type="text"
-          placeholder="Email..."
+          placeholder="Customer's email..."
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
 
-        <button type="submit">SIGNUP</button>
-        <p>
-          <Link to="/login">Log in</Link>
-        </p>
+        <button onClick={checkCustomer}>Check customer</button>
+        <button type="submit">Issue Card</button>
       </form>
     </div>
   );
