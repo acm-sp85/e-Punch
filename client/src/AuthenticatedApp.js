@@ -55,7 +55,7 @@ function AuthenticatedApp({ currentUser, setCurrentUser }) {
       </nav>
       <div className="App">
         <Switch>
-          <Route path="/customers">
+          <Route exact path="/customers">
             {toggleCustomerList ? (
               <RenderList list={punchCards} />
             ) : (

@@ -26,10 +26,18 @@ puts '☕  ☕  ☕  Seeding coffee shops... ☕  ☕  ☕ '
     
 puts '👨  👩  Seeding customers... 👨  👩 '
 
-30.times {Customer.create(
-    name: Faker::Name.name,
+15.times {Customer.create(
+    name: Faker::Name.male_first_name,
     contact: Faker::PhoneNumber.cell_phone,
-    user_name:Faker::Internet.email
+    user_name:Faker::Internet.email,
+    photo: "https://randomuser.me/api/portraits/med/men/#{rand(1..75)}.jpg"
+    )}
+
+15.times {Customer.create(
+    name: Faker::Name.female_first_name,
+    contact: Faker::PhoneNumber.cell_phone,
+    user_name:Faker::Internet.email,
+    photo: "https://randomuser.me/api/portraits/med/women/#{rand(1..75)}.jpg"
     )}
     
     

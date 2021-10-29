@@ -38,6 +38,19 @@ function renderingList(props) {
       });
   };
 
+  const deleteCard = (e) => {
+    const punch_card_id = e.target.id;
+    const requestOptions = {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({}),
+    };
+
+    fetch(`/punch_cards/${punch_card_id}`, requestOptions).then(
+      console.log("Punch card deleted")
+    );
+  };
+
   return (
     <div>
       {props.list.map((item) => (
@@ -66,6 +79,14 @@ function renderingList(props) {
                 id={item.id}
               >
                 Reset
+              </a>
+              <a
+                href="#"
+                className="btn btn-primary"
+                onClick={deleteCard}
+                id={item.id}
+              >
+                Delete
               </a>
             </div>
           </div>

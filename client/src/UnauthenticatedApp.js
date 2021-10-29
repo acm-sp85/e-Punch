@@ -12,10 +12,6 @@ function UnauthenticatedApp({ setCurrentUser }) {
             <Link to="/">ePUNCH</Link>
           </h3>
         </span>
-        <span>
-          {/* Logged in as {currentUser.username}{" "}
-          <button onClick={handleLogout}>Logout</button> */}
-        </span>
       </nav>
       <Switch>
         <Route exact path="/">
