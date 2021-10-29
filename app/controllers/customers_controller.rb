@@ -43,6 +43,16 @@ class CustomersController < ApplicationController
       render json: @customer.coffee_shops, status: :ok
     end
   end
+  
+  def find_by_name
+    # x = Customer.find_by_user_name("xuan@romaguera-lind.co")
+    # byebug
+    # x = Customer.find_by_user_name(params[:user_name])
+    # x = Customer.where("user_name like ?", "%sha.oberbrunne%")
+    x = Customer.where("user_name like ?", "%#{params[:user_name]}%")
+
+    render json: x, status: :ok
+  end
 
 
 
@@ -57,4 +67,6 @@ class CustomersController < ApplicationController
       def set_customer
         @customer = Customer.find_by(id: params[:id])
       end
+
+
 end
