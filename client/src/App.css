@@ -2,15 +2,40 @@
   text-align: center;
 }
 
+body {
+  background-color: #fff3e3;
+  font-family: "Fugue", Helvetica, Arial, sans-serif !important;
+  font-size: 14px !important;
+  color: #2a317d !important;
+  letter-spacing: 0.7px !important;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
+}
+a {
+  color: #e94b51;
 }
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
+}
+.custom-card {
+  background-color: #fff3e3;
+}
+
+.custom-button {
+  color: #2a317d;
+  background-color: #fff3e3;
+  border-color: #2a317d;
+  border-width: thin;
+}
+
+.custom-imputs {
+  background-color: #fff3e3;
 }
 
 .App-header {

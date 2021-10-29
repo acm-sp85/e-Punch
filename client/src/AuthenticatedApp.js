@@ -49,10 +49,18 @@ function AuthenticatedApp({ currentUser, setCurrentUser }) {
         </span>
         <span>
           <p>You are signed in as {currentUser.name}</p>
-          <button onClick={logOut}>Logout</button>
-          <button onClick={getCards}>Show list of punch cards</button>
-          <button onClick={displayProfile}>Your profile</button>
-          <button onClick={displayIssuingForm}>Issue a card</button>
+          <button className="custom-button" onClick={logOut}>
+            Logout
+          </button>
+          <button className="custom-button" onClick={getCards}>
+            Show list of punch cards
+          </button>
+          <button className="custom-button" onClick={displayProfile}>
+            Your profile
+          </button>
+          <button className="custom-button" onClick={displayIssuingForm}>
+            Issue a card
+          </button>
         </span>
       </nav>
       <div className="App">

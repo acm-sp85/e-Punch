@@ -47,7 +47,9 @@ function CoffeeShopProfile({ currentUser, setCurrentUser }) {
           <p>{currentUser.contact}</p>
           <p>{currentUser.description}</p>
           <p>{currentUser.user_name}</p>
-          <button onClick={toggle}>Edit Profile</button>
+          <button onClick={toggle} className="custom-button">
+            Edit Profile
+          </button>
         </div>
       ) : (
         <div>
@@ -78,7 +80,9 @@ function CoffeeShopProfile({ currentUser, setCurrentUser }) {
               value={contact}
               onChange={(e) => setContact(e.target.value)}
             />
-            <button type="submit">Apply Changes</button>
+            <button type="submit" className="custom-button">
+              Apply Changes
+            </button>
           </form>
         </div>
       )}

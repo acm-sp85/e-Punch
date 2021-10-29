@@ -59,7 +59,7 @@ function renderingList(props) {
     <div>
       {props.cardsList.map((item) => (
         <div key={item.id}>
-          <div className="card">
+          <div className="card" className="custom-card">
             <img
               src="https://uploads-ssl.webflow.com/6046a7b973c7a186ae5ce9d3/6046a7b973c7a107ee5cea18_Testimonial%20User.svg"
               className="avatar"
@@ -69,24 +69,24 @@ function renderingList(props) {
               <h5 className="card-title">{item.customer_name}</h5>
               <p className="card-text">{item.counter} / 10</p>
               <a
+                className="custom-button"
                 href="#"
-                className="btn btn-primary"
                 onClick={punchCard}
                 id={item.id}
               >
                 PUNCH
               </a>
               <a
+                className="custom-button"
                 href="#"
-                className="btn btn-primary"
                 onClick={resetCounter}
                 id={item.id}
               >
                 Reset
               </a>
               <a
+                className="custom-button"
                 href="#"
-                className="btn btn-primary"
                 onClick={deleteCard}
                 id={item.id}
               >

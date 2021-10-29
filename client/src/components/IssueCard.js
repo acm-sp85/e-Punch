@@ -57,15 +57,24 @@ function Signup({ currentUser, setCurrentUser }) {
       <h1>ISSUE CARD</h1>
       <form onSubmit={handleSubmit}>
         <input
+          className="custom-imputs"
           type="text"
           placeholder="Customer's email..."
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
 
-        <button onClick={checkCustomer}>Check customer</button>
+        <button className="custom-button" onClick={checkCustomer}>
+          Check customer
+        </button>
 
-        {toggleButton ? <button type="submit">Issue Card</button> : <div></div>}
+        {toggleButton ? (
+          <button type="submit" className="custom-button">
+            Issue Card
+          </button>
+        ) : (
+          <div></div>
+        )}
       </form>
     </div>
   );
