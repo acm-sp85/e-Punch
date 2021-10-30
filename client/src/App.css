@@ -2,6 +2,10 @@
   text-align: center;
 }
 
+.logo {
+  font-family: "Monsieur La Doulaise", cursive;
+}
+
 body {
   background-color: #fff3e3;
   font-family: "Fugue", Helvetica, Arial, sans-serif !important;
@@ -16,6 +20,11 @@ body {
 }
 a {
   color: #e94b51;
+  text-decoration: none;
+}
+
+.cursor {
+  cursor: pointer;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -36,6 +45,8 @@ a {
 
 .custom-imputs {
   background-color: #fff3e3;
+  border-color: #2a317d;
+  border-width: thin;
 }
 
 .App-header {

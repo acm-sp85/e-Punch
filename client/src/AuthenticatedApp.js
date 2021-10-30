@@ -39,12 +39,18 @@ function AuthenticatedApp({ currentUser, setCurrentUser }) {
     setToggleProfile(!toggleProfile);
   };
 
+  const updateState = () => {
+    console.log("Need to update the state");
+  };
+
   return (
     <div>
       <nav>
         <span>
           <h3>
-            <Link to="/">ePUNCH</Link>
+            <Link className="logo" to="/">
+              e-Punch
+            </Link>
           </h3>
         </span>
         <span>
@@ -65,9 +71,12 @@ function AuthenticatedApp({ currentUser, setCurrentUser }) {
       </nav>
       <div className="App">
         <Switch>
+          <Route exact path="/">
+            <h4>Punchy</h4>
+          </Route>
           <Route exact path="/customers">
             {toggleCustomerList ? (
-              <RenderList cardsList={punchCards} />
+              <RenderList cardsList={punchCards} updateState={updateState} />
             ) : (
               <div></div>
             )}

@@ -56,6 +56,7 @@ function CoffeeShopProfile({ currentUser, setCurrentUser }) {
           <h1>SIGNUP</h1>
           <form onSubmit={handleSubmit}>
             <input
+              className="custom-imputs"
               type="text"
               placeholder="Name..."
               value={name}
@@ -63,18 +64,21 @@ function CoffeeShopProfile({ currentUser, setCurrentUser }) {
             />
 
             <input
+              className="custom-imputs"
               type="text"
               placeholder="Description..."
               value={description}
               onChange={(e) => setDescription(e.target.value)}
             />
             <input
+              className="custom-imputs"
               type="text"
               placeholder="Address..."
               value={address}
               onChange={(e) => setAddress(e.target.value)}
             />
             <input
+              className="custom-imputs"
               type="text"
               placeholder="Phone number..."
               value={contact}

@@ -26,6 +26,7 @@ function renderingList(props) {
     const updatedCounter = props.cardsList;
     const counter = updatedCounter.find((card) => card.id == punch_card_id);
 
+    props.updateState();
     const requestOptions = {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
@@ -55,6 +56,12 @@ function renderingList(props) {
     );
   };
 
+  const handleClick = (e) => {
+    e.preventDefault();
+    console.log(e.target.id);
+    props.updateState();
+  };
+
   return (
     <div>
       {props.cardsList.map((item) => (
@@ -66,7 +73,13 @@ function renderingList(props) {
               alt="img not found"
             />
             <div className="card-body">
-              <h5 className="card-title">{item.customer_name}</h5>
+              <h5
+                className="card-title cursor"
+                onClick={handleClick}
+                id={item.id}
+              >
+                {item.customer_name}
+              </h5>
               <p className="card-text">{item.counter} / 10</p>
               <a
                 className="custom-button"
