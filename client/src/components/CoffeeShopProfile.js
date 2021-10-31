@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import "../App.css";
 
-function Profile({ props, currentUser }) {
+function Profile({ currentUser }) {
   const [name, setName] = useState(currentUser.currentUser.name);
   const [address, setAddress] = useState(currentUser.currentUser.address);
   const [description, setDescription] = useState(

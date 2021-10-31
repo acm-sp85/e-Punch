@@ -38,7 +38,7 @@ function AuthenticatedApp(currentUser, setCurrentUser) {
           path="/profile"
           render={(props) => (
             <CoffeeShopProfile
-              props={props}
+              // props={props}
               currentUser={currentUser}
               setCurrentUser={setCurrentUser}
             />

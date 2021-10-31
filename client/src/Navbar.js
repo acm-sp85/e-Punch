@@ -1,7 +1,7 @@
 import React from "react";
-import { Link } from "react-router-dom";
-
+import { Link, useHistory } from "react-router-dom";
 const navbar = () => {
+  const history = useHistory();
   const logOut = () => {
     fetch("/logout", { method: "DELETE" }).then(() => {
       console.log("logged out");

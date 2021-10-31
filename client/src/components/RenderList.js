@@ -2,41 +2,42 @@ import React, { useState } from "react";
 import "../App.css";
 
 function renderingList(props) {
-  const [punchCards] = useState(props.currentUser.currentUser.punch_cards);
+  const [punchCards, setPunchCards] = useState(
+    props.currentUser.currentUser.punch_cards
+  );
 
   //PUNCHING CARD
   const punchCard = (e) => {
     const punch_card_id = e.target.id;
-
-    console.log(punchCards);
     const punchedCard = punchCards.find((card) => card.id == punch_card_id);
 
-    console.log(
-      "Need to update State with counter +1 :",
-      punchedCard.counter,
-      "+1"
-    );
-
-    // const updatedCounter = props.cardsList;
-    // const counter = updatedCounter.find((card) => card.id === punch_card_id);
-
+    const updatingCard = punchCards.map((card) => {
+      if (card.id == punch_card_id) {
+        card.counter += 1;
+      }
+    });
     const requestOptions = {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        counter: punchedCard.counter + 1,
+        counter: punchedCard.counter,
       }),
     };
 
     fetch(`/punch_cards/${punch_card_id}`, requestOptions)
       .then((response) => response.json())
-      .then((updated) => {
-        console.log(updated);
-      });
+      .then((updated) => {});
   };
   //RESETTING CARD
   const resetCounter = (e) => {
     const punch_card_id = e.target.id;
+
+    const resettingCard = punchCards.map((card) => {
+      if (card.id == punch_card_id) {
+        card.counter = 0;
+      }
+    });
+
     const requestOptions = {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
@@ -51,10 +52,13 @@ function renderingList(props) {
         console.log(updated);
       });
   };
-
   //DELETING CARD
   const deleteCard = (e) => {
     const punch_card_id = e.target.id;
+    const filteredCards = punchCards.filter((card) => card.id != punch_card_id);
+    console.log(filteredCards);
+    setPunchCards(filteredCards);
+
     const requestOptions = {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
@@ -64,12 +68,6 @@ function renderingList(props) {
     fetch(`/punch_cards/${punch_card_id}`, requestOptions).then(
       console.log("Punch card deleted")
     );
-  };
-
-  const handleClick = (e) => {
-    e.preventDefault();
-    console.log(e.target.id);
-    props.updateState();
   };
 
   return (
@@ -83,11 +81,7 @@ function renderingList(props) {
               alt="img not found"
             />
             <div className="card-body">
-              <h5
-                className="card-title cursor"
-                onClick={handleClick}
-                id={item.id}
-              >
+              <h5 className="card-title" id={item.id}>
                 {item.customer_name}
               </h5>
               <p className="card-text">{item.counter} / 10</p>
