@@ -1,9 +1,15 @@
+* {
+  text-align: center;
+  margin-top: 25px;
+}
+
 .App {
   text-align: center;
 }
 
 .logo {
   font-family: "Monsieur La Doulaise", cursive;
+  margin-bottom: 30px;
 }
 
 body {
@@ -14,17 +20,24 @@ body {
   letter-spacing: 0.7px !important;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
 a {
   color: #e94b51;
   text-decoration: none;
 }
 
+.error {
+  color: #e94b51;
+}
+
 .cursor {
   cursor: pointer;
+}
+
+.navbar {
+  display: inline;
+  margin-left: 30px;
+  justify-content: center;
+  align-items: center;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -41,6 +54,8 @@ a {
   background-color: #fff3e3;
   border-color: #2a317d;
   border-width: thin;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 .custom-imputs {

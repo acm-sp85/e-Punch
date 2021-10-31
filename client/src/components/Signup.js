@@ -44,7 +44,7 @@ function Signup({ setCurrentUser }) {
 
   return (
     <div>
-      <h1>SIGNUP</h1>
+      <h3>SIGNUP</h3>
       <form onSubmit={handleSubmit}>
         <input
           className="custom-imputs"
@@ -53,6 +53,7 @@ function Signup({ setCurrentUser }) {
           value={name}
           onChange={(e) => setName(e.target.value)}
         />
+        <br />
         <input
           className="custom-imputs"
           type="text"
@@ -61,6 +62,7 @@ function Signup({ setCurrentUser }) {
           onChange={(e) => setEmail(e.target.value)}
         />
 
+        <br />
         <input
           className="custom-imputs"
           type="text"
@@ -68,6 +70,7 @@ function Signup({ setCurrentUser }) {
           value={description}
           onChange={(e) => setDescription(e.target.value)}
         />
+        <br />
         <input
           className="custom-imputs"
           type="text"
@@ -75,6 +78,7 @@ function Signup({ setCurrentUser }) {
           value={address}
           onChange={(e) => setAddress(e.target.value)}
         />
+        <br />
         <input
           className="custom-imputs"
           type="text"
@@ -82,13 +86,15 @@ function Signup({ setCurrentUser }) {
           value={contact}
           onChange={(e) => setContact(e.target.value)}
         />
+        <br />
         <input
           className="custom-imputs"
           type="password"
-          placeholder="Confirm Password..."
+          placeholder="Password..."
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
+        <br />
         <input
           className="custom-imputs"
           type="password"
@@ -96,6 +102,8 @@ function Signup({ setCurrentUser }) {
           value={passwordConfirmation}
           onChange={(e) => setPasswordConfirmation(e.target.value)}
         />
+        <br />
+        <br />
         <button className="custom-button" type="submit">
           SIGNUP
         </button>

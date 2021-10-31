@@ -1,17 +1,17 @@
 import React, { useState } from "react";
-// import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import "../App.css";
 
-function CoffeeShopProfile({ currentUser, setCurrentUser }) {
-  //   const [user, setUser] = useState("");
-
-  const [name, setName] = useState(currentUser.name);
-  const [address, setAddress] = useState(currentUser.address);
-  const [description, setDescription] = useState(currentUser.description);
-  const coffee_shop_id = useState(currentUser.id);
-  const [contact, setContact] = useState(currentUser.contact);
+function Profile({ props, currentUser }) {
+  const [name, setName] = useState(currentUser.currentUser.name);
+  const [address, setAddress] = useState(currentUser.currentUser.address);
+  const [description, setDescription] = useState(
+    currentUser.currentUser.description
+  );
+  const coffee_shop_id = useState(currentUser.currentUser.id);
+  const [contact, setContact] = useState(currentUser.currentUser.contact);
   const [toggleToEdit, setToggleToEdit] = useState(true);
-  //   const history = useHistory();
+  const history = useHistory();
 
   const toggle = () => {
     setToggleToEdit(!toggleToEdit);
@@ -35,6 +35,7 @@ function CoffeeShopProfile({ currentUser, setCurrentUser }) {
       .then((response) => response.json())
       .then((updated) => {
         console.log(updated);
+        history.push("/");
       });
   };
 
@@ -42,18 +43,18 @@ function CoffeeShopProfile({ currentUser, setCurrentUser }) {
     <div>
       {toggleToEdit ? (
         <div>
-          <h1>{currentUser.name}</h1>
-          <p>{currentUser.address}</p>
-          <p>{currentUser.contact}</p>
-          <p>{currentUser.description}</p>
-          <p>{currentUser.user_name}</p>
+          <h1>{currentUser.currentUser.name}</h1>
+          <p>{currentUser.currentUser.address}</p>
+          <p>{currentUser.currentUser.contact}</p>
+          <p>{currentUser.currentUser.description}</p>
+          <p>{currentUser.currentUser.user_name}</p>
           <button onClick={toggle} className="custom-button">
             Edit Profile
           </button>
         </div>
       ) : (
         <div>
-          <h1>SIGNUP</h1>
+          <h3>PROFILE</h3>
           <form onSubmit={handleSubmit}>
             <input
               className="custom-imputs"
@@ -62,6 +63,7 @@ function CoffeeShopProfile({ currentUser, setCurrentUser }) {
               value={name}
               onChange={(e) => setName(e.target.value)}
             />
+            <br />
 
             <input
               className="custom-imputs"
@@ -70,6 +72,7 @@ function CoffeeShopProfile({ currentUser, setCurrentUser }) {
               value={description}
               onChange={(e) => setDescription(e.target.value)}
             />
+            <br />
             <input
               className="custom-imputs"
               type="text"
@@ -77,6 +80,7 @@ function CoffeeShopProfile({ currentUser, setCurrentUser }) {
               value={address}
               onChange={(e) => setAddress(e.target.value)}
             />
+            <br />
             <input
               className="custom-imputs"
               type="text"
@@ -84,6 +88,8 @@ function CoffeeShopProfile({ currentUser, setCurrentUser }) {
               value={contact}
               onChange={(e) => setContact(e.target.value)}
             />
+            <br />
+            <br />
             <button type="submit" className="custom-button">
               Apply Changes
             </button>
@@ -93,4 +99,4 @@ function CoffeeShopProfile({ currentUser, setCurrentUser }) {
     </div>
   );
 }
-export default CoffeeShopProfile;
+export default Profile;

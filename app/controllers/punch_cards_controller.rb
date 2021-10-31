@@ -1,4 +1,5 @@
 class PunchCardsController < ApplicationController
+  before_action :check_authorization, except: [:create]
   before_action :set_punch, only: [:show, :update, :destroy]
     def index
 
@@ -48,6 +49,9 @@ class PunchCardsController < ApplicationController
 
       def set_punch
         @punch = PunchCard.find_by(id: params[:id])
+      end
+      def check_authorization
+        return render json: { error: "must be logged in!"} , status: :unauthorized unless coffee_shop
       end
 
 

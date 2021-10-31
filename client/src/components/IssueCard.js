@@ -2,11 +2,12 @@ import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import "../App.css";
 
-function Signup({ currentUser, setCurrentUser }) {
+function IssueNew({ currentUser, setCurrentUser }) {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [customerId, setCustomerId] = useState("");
   const [toggleButton, setToggleButton] = useState(false);
+  const [toggleError, setToggleError] = useState(false);
   const history = useHistory();
 
   const handleSubmit = (e) => {
@@ -16,7 +17,7 @@ function Signup({ currentUser, setCurrentUser }) {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        coffee_shop_id: currentUser.id,
+        coffee_shop_id: currentUser.currentUser.id,
         customer_id: customerId,
         counter: 0,
       }),
@@ -43,6 +44,7 @@ function Signup({ currentUser, setCurrentUser }) {
           setToggleButton(true);
           return response.json();
         } else {
+          setToggleError(true);
           throw new Error("Something went wrong");
         }
       })
@@ -54,7 +56,7 @@ function Signup({ currentUser, setCurrentUser }) {
 
   return (
     <div>
-      <h1>ISSUE CARD</h1>
+      <h3>ISSUE CARD</h3>
       <form onSubmit={handleSubmit}>
         <input
           className="custom-imputs"
@@ -63,10 +65,13 @@ function Signup({ currentUser, setCurrentUser }) {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
+        <br />
+        <br />
 
         <button className="custom-button" onClick={checkCustomer}>
           Check customer
         </button>
+        <br />
 
         {toggleButton ? (
           <button type="submit" className="custom-button">
@@ -75,8 +80,14 @@ function Signup({ currentUser, setCurrentUser }) {
         ) : (
           <div></div>
         )}
+        <br />
+        {toggleError ? (
+          <p className="error">Customer not registered in ePunch App</p>
+        ) : (
+          <div></div>
+        )}
       </form>
     </div>
   );
 }
-export default Signup;
+export default IssueNew;

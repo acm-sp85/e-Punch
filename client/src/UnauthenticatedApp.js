@@ -8,9 +8,7 @@ function UnauthenticatedApp({ setCurrentUser }) {
     <div>
       <nav>
         <span>
-          <h3>
-            <Link to="/">ePUNCH</Link>
-          </h3>
+          <h1 className="logo">ePUNCH</h1>
         </span>
       </nav>
       <Switch>

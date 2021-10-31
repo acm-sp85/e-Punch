@@ -1,4 +1,5 @@
 class CustomersController < ApplicationController
+  before_action :check_authorization, except: [:create]
   before_action :set_customer, only: [:show, :update, :destroy, :show_punch_cards, :show_coffee_shops]
     def index
       customers = Customer.all
@@ -68,6 +69,9 @@ class CustomersController < ApplicationController
 
       def set_customer
         @customer = Customer.find_by(id: params[:id])
+      end
+      def check_authorization
+        return render json: { error: "must be logged in!"} , status: :unauthorized unless coffee_shop
       end
 
 

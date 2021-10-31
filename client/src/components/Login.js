@@ -28,16 +28,9 @@ function Login({ setCurrentUser }) {
       });
   };
 
-  const logOut = () => {
-    fetch("/logout", { method: "DELETE" }).then(() => {
-      console.log("logged out");
-      history.push("/");
-    });
-  };
-
   return (
     <div>
-      <h1>LOGIN</h1>
+      <h3>LOGIN</h3>
       <form onSubmit={handleSubmit}>
         <input
           className="custom-imputs"
@@ -46,6 +39,7 @@ function Login({ setCurrentUser }) {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
+        <br />
         <input
           className="custom-imputs"
           type="password"
@@ -53,6 +47,8 @@ function Login({ setCurrentUser }) {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
+        <br />
+        <br />
         <button className="custom-button" type="submit">
           LOGIN
         </button>
@@ -60,9 +56,6 @@ function Login({ setCurrentUser }) {
       <p>
         <Link to="/signup">Sign Up</Link>
       </p>
-      <button className="custom-button" onClick={logOut}>
-        Logout
-      </button>
     </div>
   );
 }

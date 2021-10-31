@@ -1,15 +1,30 @@
-import React from "react";
+import React, { useState } from "react";
 import "../App.css";
 
 function renderingList(props) {
-  //RESETTING CARD
-  const resetCounter = (e) => {
+  const [punchCards] = useState(props.currentUser.currentUser.punch_cards);
+
+  //PUNCHING CARD
+  const punchCard = (e) => {
     const punch_card_id = e.target.id;
+
+    console.log(punchCards);
+    const punchedCard = punchCards.find((card) => card.id == punch_card_id);
+
+    console.log(
+      "Need to update State with counter +1 :",
+      punchedCard.counter,
+      "+1"
+    );
+
+    // const updatedCounter = props.cardsList;
+    // const counter = updatedCounter.find((card) => card.id === punch_card_id);
+
     const requestOptions = {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        counter: 0,
+        counter: punchedCard.counter + 1,
       }),
     };
 
@@ -19,19 +34,14 @@ function renderingList(props) {
         console.log(updated);
       });
   };
-
-  //PUNCHING CARD
-  const punchCard = (e) => {
+  //RESETTING CARD
+  const resetCounter = (e) => {
     const punch_card_id = e.target.id;
-    const updatedCounter = props.cardsList;
-    const counter = updatedCounter.find((card) => card.id == punch_card_id);
-
-    props.updateState();
     const requestOptions = {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        counter: counter.counter + 1,
+        counter: 0,
       }),
     };
 
@@ -64,7 +74,7 @@ function renderingList(props) {
 
   return (
     <div>
-      {props.cardsList.map((item) => (
+      {punchCards.map((item) => (
         <div key={item.id}>
           <div className="card" className="custom-card">
             <img
