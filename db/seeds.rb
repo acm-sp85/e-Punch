@@ -17,12 +17,19 @@ PunchCard.destroy_all
 
 puts '☕  ☕  ☕  Seeding coffee shops... ☕  ☕  ☕ '
 
+CoffeeShop.create(
+    name: "Admin",
+    user_name: "a",
+    password: "password"
+    
+)
 15.times {CoffeeShop.create(
     name: Faker::Name.name,
     user_name: Faker::Internet.email,
     address: Faker::Address.full_address,
     contact: Faker::PhoneNumber.cell_phone,
     password: "password")}
+    
     
 puts '👨  👩  Seeding customers... 👨  👩 '
 
@@ -49,6 +56,14 @@ puts '💳  💳  💳  Seeding punch cards... 💳  💳  💳 '
     counter: rand(1..9)
    
 )}
+10.times {PunchCard.create(
+    coffee_shop_id: 1,
+    customer_id: rand(1..20),
+    counter: rand(1..9)
+   
+)}
+
+
 
 
 

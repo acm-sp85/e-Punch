@@ -60,7 +60,7 @@ function IssueNew({ currentUser, setCurrentUser }) {
       <form onSubmit={handleSubmit}>
         <input
           className="custom-imputs"
-          type="text"
+          type="email"
           placeholder="Customer's email..."
           value={email}
           onChange={(e) => setEmail(e.target.value)}

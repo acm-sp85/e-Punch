@@ -55,6 +55,7 @@ function renderingList(props) {
   //DELETING CARD
   const deleteCard = (e) => {
     const punch_card_id = e.target.id;
+
     const filteredCards = punchCards.filter((card) => card.id != punch_card_id);
     console.log(filteredCards);
     setPunchCards(filteredCards);
@@ -84,6 +85,7 @@ function renderingList(props) {
               <h5 className="card-title" id={item.id}>
                 {item.customer_name}
               </h5>
+
               <p className="card-text">{item.counter} / 10</p>
               <a
                 className="custom-button"
