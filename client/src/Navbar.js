@@ -23,6 +23,7 @@ const navbar = () => {
       <li className="navbar">
         <Link to="/issue-new-card">NEW CARD</Link>
       </li>
+
       <button className="custom-button" onClick={logOut}>
         LOG OUT
       </button>

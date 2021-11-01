@@ -25,7 +25,7 @@ Rails.application.routes.draw do
   get "/customers/", to: "customers#index"
   get "/customers/find/:user_name", to: "customers#find_by_name"
   get "/customers/:id", to: "customers#show"
-  
+  post "/customers", to: "customers#create"
   get "/coffee_shops/:id/customers", to: "coffee_shops#show_customers"
 
   post "/signup", to: "coffee_shops#create"

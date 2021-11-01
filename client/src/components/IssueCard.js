@@ -8,6 +8,7 @@ function IssueNew({ currentUser, setCurrentUser }) {
   const [customerId, setCustomerId] = useState("");
   const [toggleButton, setToggleButton] = useState(false);
   const [toggleError, setToggleError] = useState(false);
+
   const history = useHistory();
 
   const handleSubmit = (e) => {
@@ -54,6 +55,11 @@ function IssueNew({ currentUser, setCurrentUser }) {
       });
   };
 
+  const signUpNewCustomer = () => {
+    console.log("create new customer");
+    history.push("/new-customer");
+  };
+
   return (
     <div>
       <h3>ISSUE CARD</h3>
@@ -82,11 +88,22 @@ function IssueNew({ currentUser, setCurrentUser }) {
         )}
         <br />
         {toggleError ? (
-          <p className="error">Customer not registered in ePunch App</p>
+          <div>
+            <p className="error">Customer not registered in ePunch App</p>
+
+            <br />
+          </div>
         ) : (
           <div></div>
         )}
       </form>
+      {toggleError ? (
+        <button className="custom-button" onClick={signUpNewCustomer}>
+          Create new customer
+        </button>
+      ) : (
+        <div></div>
+      )}
     </div>
   );
 }

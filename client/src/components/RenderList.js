@@ -12,7 +12,7 @@ function renderingList(props) {
     const punchedCard = punchCards.find((card) => card.id == punch_card_id);
 
     const updatingCard = punchCards.map((card) => {
-      if (card.id == punch_card_id) {
+      if (card.id == punch_card_id && card.counter < 10) {
         card.counter += 1;
       }
     });
