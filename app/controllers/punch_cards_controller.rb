@@ -21,21 +21,34 @@ class PunchCardsController < ApplicationController
 
       def create
         punch = PunchCard.create!(punch_params)
-        render json: punch, status: :created
+        if punch
+          render json: punch, status: :created
+        else
+          render json: {errors: punch.errors.full_messages}, status: :unprocessable_entity 
+        end
 
     end
 
     def update
-      @punch.update(punch_params)
-      render json: @punch, status: :accepted
+      updated_punch_card = @punch.update(punch_params)
+      if updated_punch_card
+        render json: @punch, status: :accepted
+      else
+        render json: {error: "Impossible to update punch card"}, status: :unprocessable_entity 
+      end
       
     end
     
     
     def destroy
       
-      @punch.destroy
-      head :no_content, status: :ok
+      if @punch.destroy
+
+        head :no_content, status: :ok
+
+      else
+        render json: {error: "Impossible to delete punch card"}, status: :unprocessable_entity 
+      end
     end
 
 

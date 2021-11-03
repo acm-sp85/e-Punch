@@ -10,52 +10,67 @@ class CustomersController < ApplicationController
 
         if @customer 
           render json: @customer, status: :ok
-          else
-            render json: {error: "Customer not found"} , status: :not_found
-          end
+        else
+          render json: {error: "Customer not found"} , status: :not_found
         end
+    end
         
-        def create
-          customer = Customer.create!(customer_params)
-          render json: customer, status: :created
-          
-        end
-        
-        def update
-          @customer.update(customer_params)
-          render json: @customer, status: :accepted
-          
-        end
-        
-        def destroy
-          
-          @customer.destroy
-          head :no_content, status: :ok
-        end
-        
-        
-        def show_punch_cards
+    def show_punch_cards
           if @customer
             render json: @customer.punch_cards, status: :ok
+          else
+            render json: {error: "No punchards to show"}
           end
+    end
+
+    def create
+          customer = Customer.create(customer_params)
+          if customer
+            render json: customer, status: :created
+          else
+            render json: {errors: customer.errors.full_messages}, status: :unprocessable_entity 
+          end
+          
+    end
+        
+    def update
+          updated_customer = @customer.update(customer_params)
+          if updated_customer
+
+            render json: @customer, status: :accepted
+          else
+            render json: {error: "Impossible to update customer"}, status: :unprocessable_entity 
+          end
+    end
+        
+    def destroy
+          
+        if  @customer.destroy
+
+          head :no_content, status: :ok
+        else
+          render json: {error: "Impossible to delete customer"}, status: :unprocessable_entity
         end
-        def show_coffee_shops
+    end
+        
+        
+    def show_coffee_shops
           if @customer
             render json: @customer.coffee_shops, status: :ok
           end
-        end
+    end
         
-        def find_by_name
+    def find_by_name
           
-          @x = Customer.where("user_name like ?", "%#{params[:user_name]}%")
+          @name_to_find = Customer.where("user_name like ?", "%#{params[:user_name]}%")
 
-          if @x !=[]
-            render json: @x[0], status: :ok
+          if @name_to_find !=[]
+            render json: @name_to_find[0], status: :ok
           else 
               render json: {error: "WRONG EMAIL OR NO CUSTOMER"} , status: :not_found
           end
 
-          end
+      end
 
 
 
@@ -69,6 +84,8 @@ class CustomersController < ApplicationController
 
       def set_customer
         @customer = Customer.find_by(id: params[:id])
+
+        #I think it was here where Michael wanted to do CoffeeShop.customer.find_by...
       end
       def check_authorization
         return render json: { error: "must be logged in!"} , status: :unauthorized unless coffee_shop
