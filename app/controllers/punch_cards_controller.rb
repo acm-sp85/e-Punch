@@ -61,7 +61,8 @@ class PunchCardsController < ApplicationController
       end
 
       def set_punch
-        @punch = PunchCard.find_by(id: params[:id])
+        # @punch = PunchCard.find_by(id: params[:id])
+        @punch = @coffee_shop.punch_cards.find_by(id: params[:id])
       end
       def check_authorization
         return render json: { error: "must be logged in!"} , status: :unauthorized unless coffee_shop

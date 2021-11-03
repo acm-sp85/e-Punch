@@ -83,7 +83,8 @@ class CustomersController < ApplicationController
       end
 
       def set_customer
-        @customer = Customer.find_by(id: params[:id])
+        # @customer = Customer.find_by(id: params[:id])
+        @customer = @coffee_shop.customers.find_by(id: params[:id])
 
         #I think it was here where Michael wanted to do CoffeeShop.customer.find_by...
       end
