@@ -5,6 +5,7 @@ import "../App.css";
 function IssueNew({ currentUser, setCurrentUser }) {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
+  const [contact, setContact] = useState("");
   const [customerId, setCustomerId] = useState("");
   const [toggleButton, setToggleButton] = useState(false);
   const [toggleError, setToggleError] = useState(false);
@@ -14,21 +15,48 @@ function IssueNew({ currentUser, setCurrentUser }) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const requestOptionsCard = {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        coffee_shop_id: currentUser.currentUser.id,
-        customer_id: customerId,
-        counter: 0,
-      }),
-    };
+    if (toggleError) {
+      console.log(name, contact, email);
+      const requestOptions = {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          user_name: email,
+          name,
+          contact,
+        }),
+      };
 
-    fetch("/punch_cards", requestOptionsCard)
-      .then((response) => response.json())
-      .then((new_card) => {
-        console.log(new_card);
+      fetch("/customers", requestOptions).then((response) => {
+        if (response.ok) {
+          response.json().then((newCustomer) => {
+            console.log(newCustomer);
+            setCustomerId(newCustomer.id);
+            setToggleButton(!toggleButton);
+            setToggleError(!toggleError);
+          });
+        } else {
+          console.log("Unable to log");
+        }
       });
+    } else {
+      console.log("issue a card");
+      const requestOptionsCard = {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          coffee_shop_id: currentUser.currentUser.id,
+          customer_id: customerId,
+          counter: 0,
+        }),
+      };
+
+      fetch("/punch_cards", requestOptionsCard)
+        .then((response) => response.json())
+        .then((new_card) => {
+          history.push("/cards");
+        });
+    }
   };
   //NEED TO LOOKUP A CUSTOMER ON OUR CUSTOMERS DB BY THEIR EMAIL. IF IT RETURNS SOMETHING THEN WE WILL ACTIVATE THE ISSUE CARD BUTTON
   const checkCustomer = (e) => {
@@ -63,6 +91,16 @@ function IssueNew({ currentUser, setCurrentUser }) {
   return (
     <div>
       <h3>ISSUE CARD</h3>
+      {toggleError ? (
+        <React.Fragment>
+          <p className="error">Customer not registered in ePunch App</p>
+          <p className="error">
+            Please fill out info bellow to create a new customer
+          </p>
+        </React.Fragment>
+      ) : (
+        <React.Fragment></React.Fragment>
+      )}
       <form onSubmit={handleSubmit}>
         <input
           className="custom-imputs"
@@ -71,39 +109,58 @@ function IssueNew({ currentUser, setCurrentUser }) {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
-        <br />
-        <br />
-
-        <button className="custom-button" onClick={checkCustomer}>
-          Check customer
-        </button>
+        {toggleError ? (
+          <React.Fragment>
+            <br />
+            <input
+              className="custom-imputs"
+              type="name"
+              placeholder="Customer's name..."
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+            <br />
+            <input
+              className="custom-imputs"
+              type="contact"
+              placeholder="Customer's phone number..."
+              value={contact}
+              onChange={(e) => setContact(e.target.value)}
+            />
+            <br />
+          </React.Fragment>
+        ) : (
+          <React.Fragment></React.Fragment>
+        )}
+        {toggleError ? (
+          <React.Fragment>
+            <button className="custom-button" /*onClick={signUpNewCustomer}*/>
+              Create new customer
+            </button>
+          </React.Fragment>
+        ) : (
+          <React.Fragment>
+            <br />
+            <button className="custom-button" onClick={checkCustomer}>
+              Check customer
+            </button>
+          </React.Fragment>
+        )}
         <br />
 
         {toggleButton ? (
-          <button type="submit" className="custom-button">
+          <button
+            type="submit"
+            className="custom-button"
+            onClick={handleSubmit}
+          >
             Issue Card
           </button>
         ) : (
-          <div></div>
+          <React.Fragment></React.Fragment>
         )}
         <br />
-        {toggleError ? (
-          <div>
-            <p className="error">Customer not registered in ePunch App</p>
-
-            <br />
-          </div>
-        ) : (
-          <div></div>
-        )}
       </form>
-      {toggleError ? (
-        <button className="custom-button" onClick={signUpNewCustomer}>
-          Create new customer
-        </button>
-      ) : (
-        <div></div>
-      )}
     </div>
   );
 }
