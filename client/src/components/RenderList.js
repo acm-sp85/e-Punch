@@ -40,9 +40,18 @@ function renderingList(props) {
       }),
     };
 
-    fetch(`/punch_cards/${punch_card_id}`, requestOptions)
-      .then((response) => response.json())
-      .then((updated) => {});
+    fetch(`/punch_cards/${punch_card_id}`, requestOptions).then((response) => {
+      if (response.ok) {
+        console.log("Card punched correctly");
+      } else {
+        console.log("Problems punching the card");
+        punchCards.map((card) => {
+          if (card.id == punch_card_id && card.counter < 10) {
+            card.counter -= 1;
+          }
+        });
+      }
+    });
   };
   //RESETTING CARD
   const resetCounter = (e) => {
@@ -62,11 +71,18 @@ function renderingList(props) {
       }),
     };
 
-    fetch(`/punch_cards/${punch_card_id}`, requestOptions)
-      .then((response) => response.json())
-      .then((updated) => {
-        console.log(updated);
-      });
+    fetch(`/punch_cards/${punch_card_id}`, requestOptions).then((response) => {
+      if (response.ok) {
+        console.log("Card reset correctly");
+      } else {
+        console.log("Problems resetting the card");
+        punchCards.map((card) => {
+          if (card.id == punch_card_id && card.counter < 10) {
+            card.counter -= 1;
+          }
+        });
+      }
+    });
   };
   //DELETING CARD
   const deleteCard = (e) => {

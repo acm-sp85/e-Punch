@@ -134,12 +134,14 @@ function IssueNew({ currentUser, setCurrentUser }) {
         )}
         {toggleError ? (
           <React.Fragment>
+            <br />
             <button className="custom-button" /*onClick={signUpNewCustomer}*/>
               Create new customer
             </button>
           </React.Fragment>
         ) : (
           <React.Fragment>
+            <br />
             <br />
             <button className="custom-button" onClick={checkCustomer}>
               Check customer
