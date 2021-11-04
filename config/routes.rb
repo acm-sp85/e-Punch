@@ -7,12 +7,12 @@ Rails.application.routes.draw do
   root to: "static#home"
 
 
-  # get "/customers/:id/punch_cards", to: "customers#show_punch_cards"
-  # get "/customers/:id/coffee_shops", to: "customers#show_coffee_shops"
-  # get "/customers/", to: "customers#index"
-  # get "/customers/find/:user_name", to: "customers#find_by_name"
-  # get "/customers/:id", to: "customers#show"
-  # post "/customers", to: "customers#create"
+  get "/customers/:id/punch_cards", to: "customers#show_punch_cards"
+  get "/customers/:id/coffee_shops", to: "customers#show_coffee_shops"
+  get "/customers/", to: "customers#index"
+  get "/customers/find/:user_name", to: "customers#find_by_name"
+  get "/customers/:id", to: "customers#show"
+  post "/customers", to: "customers#create"
   
   
   post "/punch_cards/:id/update", to: "punch_cards#update"
