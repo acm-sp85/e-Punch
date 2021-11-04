@@ -27,7 +27,10 @@ function Home(props) {
   return (
     <div class="row">
       <div className="column">
-        <img src="https://cdn-icons.flaticon.com/png/128/4201/premium/4201007.png?token=exp=1635653114~hmac=a8504d5c5d3038cee1823e07ec8c28d8" />
+        <img
+          src="https://i.dlpng.com/static/png/6478401_preview.png"
+          className="coffee-shop-icon"
+        />
       </div>
       <div className="column">
         <h1>{currentUser.name}</h1>

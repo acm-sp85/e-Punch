@@ -11,6 +11,9 @@
   font-family: "Monsieur La Doulaise", cursive;
   margin-bottom: 30px;
 }
+.coffee-shop-icon {
+  max-width: 200px;
+}
 
 body {
   background-color: #fff3e3;
