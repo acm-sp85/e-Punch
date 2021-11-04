@@ -14,11 +14,6 @@ Rails.application.routes.draw do
   root to: "static#home"
 
   
-  # Routing logic: fallback requests for React Router.
-  # Leave this here to help deploy your app later!
-  # get "*", to: "fallback#index", constraints: ->(req) { !req.xhr? && req.format.html? }
-  # get "/shops", to: "coffee_shops#index"
-  # get "/shops/:id", to: "coffee_shops#show"
 #-----
   get "/customers/:id/punch_cards", to: "customers#show_punch_cards"
   get "/customers/:id/coffee_shops", to: "customers#show_coffee_shops"
@@ -39,13 +34,5 @@ Rails.application.routes.draw do
   post "/login", to: "sessions#create"
   delete "/logout", to: "sessions#logout"
 
-
-
-
-
-#-----
-# POST 
-# PATCH
-# DELETE
 
 end
