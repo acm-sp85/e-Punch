@@ -1,10 +1,26 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../App.css";
 
 function renderingList(props) {
   const [punchCards, setPunchCards] = useState(
     props.currentUser.currentUser.punch_cards
   );
+
+  const [coffeeShopId] = useState(props.currentUser.currentUser.id);
+
+  useEffect(() => {
+    fetch(`/coffee_shops/${coffeeShopId}/punch_cards`, {
+      credentials: "include",
+    }).then((res) => {
+      if (res.ok) {
+        res.json().then((coffee_shop_punchCards) => {
+          setPunchCards(coffee_shop_punchCards);
+        });
+      } else {
+        console.log("Problems loading the user");
+      }
+    });
+  }, []);
 
   //PUNCHING CARD
   const punchCard = (e) => {

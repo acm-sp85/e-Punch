@@ -34,6 +34,8 @@ Rails.application.routes.draw do
 
 
   get "/me", to: "coffee_shops#logged_in"
+  get "/coffee_shops/:id/punch_cards", to: "coffee_shops#show_punch_cards"
+  get "/coffee_shops/:id/customers", to: "coffee_shops#show_customers"
   post "/login", to: "sessions#create"
   delete "/logout", to: "sessions#logout"
 

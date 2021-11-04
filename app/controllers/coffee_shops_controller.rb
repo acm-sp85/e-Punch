@@ -68,6 +68,7 @@ class CoffeeShopsController < ApplicationController
 
 
    def show_customers
+ 
       
       if @coffee_shop
       render json: @coffee_shop.customers, status: :accepted
@@ -79,6 +80,7 @@ class CoffeeShopsController < ApplicationController
 
   
   def show_punch_cards
+ 
       
       if @coffee_shop
       render json: @coffee_shop.punch_cards, status: :accepted

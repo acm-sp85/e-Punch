@@ -2,16 +2,34 @@ import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import "../App.css";
 
-function Profile({ currentUser }) {
-  const [name, setName] = useState(currentUser.currentUser.name);
-  const [address, setAddress] = useState(currentUser.currentUser.address);
-  const [description, setDescription] = useState(
-    currentUser.currentUser.description
-  );
-  const coffee_shop_id = useState(currentUser.currentUser.id);
-  const [contact, setContact] = useState(currentUser.currentUser.contact);
+function Profile(props) {
+  const [currentUser, setCurrentUser] = useState(props.currentUser);
+  const [name, setName] = useState("");
+  const [address, setAddress] = useState("");
+  const [description, setDescription] = useState("");
+  const [contact, setContact] = useState("");
   const [toggleToEdit, setToggleToEdit] = useState(true);
+  const [coffee_shop_id, setCoffee_shop_id] = useState("");
   const history = useHistory();
+
+  useEffect(() => {
+    fetch("/me", {
+      credentials: "include",
+    }).then((res) => {
+      if (res.ok) {
+        res.json().then((user) => {
+          setCurrentUser(user);
+          setName(user.name);
+          setAddress(user.address);
+          setDescription(user.description);
+          setContact(user.contact);
+          setCoffee_shop_id(user.id);
+        });
+      } else {
+        console.log("Couldn't access Coffee Shop's info");
+      }
+    });
+  }, []);
 
   const toggle = () => {
     setToggleToEdit(!toggleToEdit);
@@ -34,7 +52,7 @@ function Profile({ currentUser }) {
     fetch(`/coffee_shops/${coffee_shop_id}`, requestOptions)
       .then((response) => response.json())
       .then((updated) => {
-        console.log(updated);
+        setCurrentUser(updated);
         history.push("/");
       });
   };
@@ -43,11 +61,11 @@ function Profile({ currentUser }) {
     <div>
       {toggleToEdit ? (
         <div>
-          <h1>{currentUser.currentUser.name}</h1>
-          <p>{currentUser.currentUser.address}</p>
-          <p>{currentUser.currentUser.contact}</p>
-          <p>{currentUser.currentUser.description}</p>
-          <p>{currentUser.currentUser.user_name}</p>
+          <h1>{currentUser.name}</h1>
+          <p>{currentUser.address}</p>
+          <p>{currentUser.contact}</p>
+          <p>{currentUser.description}</p>
+          <p>{currentUser.user_name}</p>
           <button onClick={toggle} className="custom-button">
             Edit Profile
           </button>
