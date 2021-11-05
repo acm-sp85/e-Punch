@@ -27,10 +27,9 @@ function Home(props) {
   return (
     <div class="row">
       <div className="column">
-        <img
-          src="https://i.dlpng.com/static/png/6478401_preview.png"
-          className="coffee-shop-icon"
-        />
+        <br />
+        <h1>WELCOME</h1>
+        <br />
       </div>
       <div className="column">
         <h1>{currentUser.name}</h1>

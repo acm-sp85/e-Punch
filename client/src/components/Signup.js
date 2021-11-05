@@ -34,7 +34,7 @@ function Signup({ setCurrentUser }) {
       if (response.ok) {
         response.json().then((shop) => {
           setCurrentUser(shop);
-          history.push("/customers");
+          history.push("/profile");
         });
       } else {
         console.log("Unable to log");
