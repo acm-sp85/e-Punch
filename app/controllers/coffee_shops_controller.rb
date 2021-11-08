@@ -16,8 +16,8 @@ class CoffeeShopsController < ApplicationController
   end
       
   def show_profile
-        if session[:coffee_shop] 
-          render json:  CoffeeShop.find_by_id(session[:coffee_shop_id] ), status: :ok
+        if session[:user_id] 
+          render json:  CoffeeShop.find_by_id(session[:user_id] ), status: :ok
           else
             render json: {error: "Coffee shop not logged in"} , status: :not_found
           end
@@ -35,14 +35,14 @@ class CoffeeShopsController < ApplicationController
 
 
 
-
+#found some problems here
   def create
-        shop = CoffeeShop.create(shop_params)
-        if shop.valid?
-        session[:shop_id] = shop.id
-        render json: shop, status: :created
+    coffee_shop = CoffeeShop.create(shop_params)
+        if coffee_shop.valid?
+        session[:user_id] = coffee_shop.id
+        render json: coffee_shop, status: :created
         else
-          render json: {errors: shop.errors.full_messages}, status: :unprocessable_entity 
+          render json: {errors: coffee_shop.errors.full_messages}, status: :unprocessable_entity 
         end
         
   end

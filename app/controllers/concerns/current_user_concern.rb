@@ -5,8 +5,8 @@ included do
 end
 
 def set_current_user
-    if session[:coffee_shop_id]
-        @current_user = CoffeeShop.find(session[:coffee_shop_id])
+    if session[:user_id]
+        @current_user = CoffeeShop.find(session[:user_id])
 
     end
 end

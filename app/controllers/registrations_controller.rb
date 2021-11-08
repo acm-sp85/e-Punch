@@ -8,7 +8,7 @@ class RegistrationsController < ApplicationController
         )
 
         if coffee_shop
-            session[:coffee_shop_id] = coffee_shop.id
+            session[:user_id] = coffee_shop.id
             render json: {
                 status: :created,
                 coffee_shop: coffee_shop
