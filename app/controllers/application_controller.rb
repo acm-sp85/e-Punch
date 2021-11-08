@@ -8,7 +8,7 @@ class ApplicationController < ActionController::API
   def coffee_shop
 
     @coffee_shop ||= CoffeeShop.find_by_id(session[:user_id]) if session[:user_id]
-    # @coffee_shop = CoffeeShop.first
+
   end
 
 end

@@ -5,6 +5,7 @@ import "../App.css";
 function Login({ setCurrentUser }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("")
 
   const history = useHistory();
 
@@ -21,16 +22,31 @@ function Login({ setCurrentUser }) {
     };
 
     fetch("/login", requestOptions)
-      .then((response) => response.json())
-      .then((user) => {
-        setCurrentUser(user);
-        history.push("/customers");
+      .then((response) => {
+        if (response.ok){
+          response.json()
+          .then((user) => {
+            setCurrentUser(user);
+            history.push("/customers");
+          })
+        }else {
+          response.json()
+          .then((error) => {
+            setError(error.error)
+            console.log(error)
+          })
+        }
       });
-  };
+  }
 
   return (
     <div>
       <h3>LOGIN</h3>
+      {error? (
+        <div>
+        <p className="error">{error}</p>
+        </div>
+      ): (<div></div>)}
       <form onSubmit={handleSubmit}>
         <input
           className="custom-imputs"
