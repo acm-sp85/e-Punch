@@ -1,6 +1,6 @@
 class SessionsController < ApplicationController
 # include CurrentUserConcern
-  skip_before_action :authorized, only: :create
+  skip_before_action :check_authorization, only: :create
 
     def create
       coffee_shop = CoffeeShop.find_by(user_name: params[:user_name])

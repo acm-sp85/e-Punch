@@ -147,7 +147,7 @@ function IssueNew({ currentUser, setCurrentUser }) {
           <React.Fragment></React.Fragment>
         )}
         {error? (<React.Fragment>
-          <p className="error">{error}</p>
+          <p className="error">{error.map(e => <p>{e}</p>)}</p>
    
         </React.Fragment>) : (<React.Fragment> </React.Fragment>)}
         {toggleError ? (

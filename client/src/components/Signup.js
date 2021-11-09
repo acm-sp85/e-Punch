@@ -11,6 +11,7 @@ function Signup({ setCurrentUser }) {
   const [address, setAddress] = useState("");
   const [description, setDescription] = useState("");
   const [contact, setContact] = useState("");
+  const [error, setError] = useState("")
   const history = useHistory();
 
   const handleSubmit = (e) => {
@@ -22,7 +23,7 @@ function Signup({ setCurrentUser }) {
       body: JSON.stringify({
         user_name: email,
         password,
-        passwordConfirmation,
+        password_confirmation: passwordConfirmation,
         name,
         address,
         description,
@@ -37,7 +38,11 @@ function Signup({ setCurrentUser }) {
           history.push("/profile");
         });
       } else {
-        console.log("Unable to log");
+        response.json()
+        .then((error) => {
+          console.log(error.errors)
+          setError(error.errors)
+        })
       }
     });
   };
@@ -104,6 +109,10 @@ function Signup({ setCurrentUser }) {
         />
         <br />
         <br />
+        {error? (<React.Fragment>
+          <p className="error">{error.map(e => <p>{e}</p>)}</p>
+   
+        </React.Fragment>) : (<React.Fragment> </React.Fragment>)}
         <button className="custom-button" type="submit">
           SIGNUP
         </button>
