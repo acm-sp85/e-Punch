@@ -20,8 +20,8 @@ class PunchCardsController < ApplicationController
       end
 
       def create
-        punch = PunchCard.create!(punch_params)
-        if punch
+        punch = PunchCard.create(punch_params)
+        if punch.valid?
           render json: punch, status: :created
         else
           render json: {errors: punch.errors.full_messages}, status: :unprocessable_entity 

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import "../App.css";
 
 function IssueNew({ currentUser, setCurrentUser }) {
@@ -9,6 +9,7 @@ function IssueNew({ currentUser, setCurrentUser }) {
   const [customerId, setCustomerId] = useState("");
   const [toggleButton, setToggleButton] = useState(false);
   const [toggleError, setToggleError] = useState(false);
+  const [error, setError] = useState("")
 
   const history = useHistory();
 
@@ -16,7 +17,6 @@ function IssueNew({ currentUser, setCurrentUser }) {
     e.preventDefault();
 
     if (toggleError) {
-      console.log(name, contact, email);
       const requestOptions = {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -30,13 +30,19 @@ function IssueNew({ currentUser, setCurrentUser }) {
       fetch("/customers", requestOptions).then((response) => {
         if (response.ok) {
           response.json().then((newCustomer) => {
-            console.log(newCustomer);
             setCustomerId(newCustomer.id);
             setToggleButton(!toggleButton);
             setToggleError(!toggleError);
+            setError("")
+            console.log("user created")
           });
         } else {
-          console.log("Unable to log");
+
+          response.json()
+          .then((error) => {
+            console.log(error.errors)
+            setError(error.errors)
+          })
         }
       });
     } else {
@@ -52,9 +58,17 @@ function IssueNew({ currentUser, setCurrentUser }) {
       };
 
       fetch("/punch_cards", requestOptionsCard)
-        .then((response) => response.json())
-        .then((new_card) => {
-          history.push("/cards");
+      
+        .then((response) => {
+          if (response.ok){
+            history.push("/cards");
+
+          }else {
+            response.json()
+            .then((error) => {
+              console.log(error.error)
+            })
+          }
         });
     }
   };
@@ -132,6 +146,10 @@ function IssueNew({ currentUser, setCurrentUser }) {
         ) : (
           <React.Fragment></React.Fragment>
         )}
+        {error? (<React.Fragment>
+          <p className="error">{error}</p>
+   
+        </React.Fragment>) : (<React.Fragment> </React.Fragment>)}
         {toggleError ? (
           <React.Fragment>
             <br />
