@@ -65,7 +65,8 @@ class CustomersController < ApplicationController
           @name_to_find = Customer.where("user_name like ?", "%#{params[:user_name]}%")
 
           if @name_to_find !=[]
-            render json: @name_to_find[0], status: :ok
+            # render json: {message: "User registered in ePunch"}, status: :ok
+            render json: @name_to_find[0].id, status: :ok
           else 
               render json: {error: "WRONG EMAIL OR NO CUSTOMER"} , status: :not_found
           end

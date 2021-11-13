@@ -92,8 +92,8 @@ function IssueNew({ currentUser, setCurrentUser }) {
         }
       })
       .then((user) => {
-        console.log(user.id);
-        setCustomerId(user.id);
+        console.log(user);
+        setCustomerId(user);
       });
   };
 

@@ -35,7 +35,6 @@ class CoffeeShopsController < ApplicationController
 
 
 
-#found some problems here
   def create
     coffee_shop = CoffeeShop.create(shop_params)
         if coffee_shop.valid?
