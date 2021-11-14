@@ -103,8 +103,24 @@ function renderingList(props) {
     );
   };
 
+  const sort = () => {
+    fetch(`/coffee_shops/${coffeeShopId}/punch_cards_sorted`, {
+      credentials: "include",
+    }).then((res) => {
+      if (res.ok) {
+        res.json().then((coffee_shop_punchCards) => {
+          setPunchCards(coffee_shop_punchCards);
+          console.log(coffee_shop_punchCards);
+        });
+      } else {
+        console.log("Problems loading the user");
+      }
+    });
+  };
+
   return (
     <div>
+      <button onClick={sort}>Sort by punches</button>
       {punchCards.map((item) => (
         <div key={item.id}>
           <div className="card" className="custom-card">

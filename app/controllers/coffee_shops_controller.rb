@@ -77,10 +77,15 @@ class CoffeeShopsController < ApplicationController
       end
   end
 
+  def sort_punch_cards
+    sorted = @coffee_shop.punch_cards.all.order(counter: :desc)
+    render json: sorted, status: :ok
+end
+  
+
   
   def show_punch_cards
  
-      
       if @coffee_shop
       render json: @coffee_shop.punch_cards, status: :accepted
       else
