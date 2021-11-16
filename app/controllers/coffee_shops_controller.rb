@@ -78,7 +78,7 @@ class CoffeeShopsController < ApplicationController
   end
 
   def sort_punch_cards
-    sorted = @coffee_shop.punch_cards.all.order(counter: :desc)
+    sorted = @coffee_shop.punch_cards.all.order(counter: :asc)
     render json: sorted, status: :ok
 end
   

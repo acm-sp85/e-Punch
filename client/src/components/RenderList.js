@@ -120,7 +120,9 @@ function renderingList(props) {
 
   return (
     <div>
-      <button onClick={sort}>Sort by punches</button>
+      <button onClick={sort} className="custom-button">
+        Sort by punches
+      </button>
       {punchCards.map((item) => (
         <div key={item.id}>
           <div className="card" className="custom-card">
