@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   resources :coffee_shops
   resources :sessions, only: [:create]
   resources :registrations, only: [:create]
-  root to: "static#home"
+
 
   get "/me", to: "coffee_shops#logged_in"
   get "/coffee_shops/:id/punch_cards_sorted", to: "coffee_shops#sort_punch_cards"
