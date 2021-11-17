@@ -24,10 +24,12 @@ https://github.com/acm-sp85/phase4-project
 
 You can use the following commands to run the application:
 
-
 - `bundle install`
 - `npm install`
+- rails db:migrate
+- rails db:seed
 
 - `rails s`: run the backend on [http://localhost:3000](http://localhost:3000)
 - `npm start --prefix client`: run the frontend on
   [http://localhost:4000](http://localhost:4000)
+-
