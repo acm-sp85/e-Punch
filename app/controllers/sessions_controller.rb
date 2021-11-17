@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
         if coffee_shop&.authenticate(params[:password])
           session[:user_id] = coffee_shop.id
           render json: coffee_shop, status: :ok
-          # byebug
+          byebug
 
         else
           render json: { error: "Invalid username or password"} , status: :unauthorized

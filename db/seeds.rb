@@ -11,7 +11,7 @@ puts '☕  ☕  ☕  Seeding coffee shops... ☕  ☕  ☕ '
 
 CoffeeShop.create(
     name: "Admin",
-    user_name: "a",
+    user_name: "admin",
     description: "Admin",
     contact: "0",
     password: "password"
