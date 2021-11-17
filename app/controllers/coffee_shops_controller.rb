@@ -99,6 +99,7 @@ class CoffeeShopsController < ApplicationController
         @coffee_shop = CoffeeShop.find_by(id: params[:id])
   end
   def check_authorization
-        return render json: { error: "must be logged in!"} , status: :unauthorized unless coffee_shop
+        # return render json: { error: "must be logged in!"} , status: :unauthorized unless coffee_shop
+        return render json: { error: "must be logged in!"} , status: :unauthorized unless session.include? :user_id
   end
 end
