@@ -4,7 +4,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby "2.7.5"
 
 gem 'rails', '~> 6.1.4', '>= 6.1.4.1'
-gem 'pg', '~> 1.1'
+gem 'pg'
 gem 'puma', '~> 5.0'
 gem 'bcrypt', '~> 3.1.7'
 gem "rails_same_site_cookie"
