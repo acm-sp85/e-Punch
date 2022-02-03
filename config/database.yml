@@ -82,7 +82,9 @@ test:
 # for a full overview on how database connection configuration can be specified.
 #
 production:
-  <<: *default
-  database: coffee_shops_production
-  username: react_rails_api_project_template
-  password: <%= ENV['REACT_RAILS_API_PROJECT_TEMPLATE_DATABASE_PASSWORD'] %>
+   adapter: postgresql
+  encoding: unicode
+  database: bazaar_sq_production
+  pool: 5
+  username: franciscoacontellmonje
+  password:
