@@ -1,35 +1,61 @@
-# ePUNCH: The digital punch card that is always in your pocket.
+# ePUNCH
 
-https://github.com/acm-sp85/phase4-project
+## The digital punch card that is always in your pocket.
+
+<br>
+<div align="center">
+<img src="ePunch.gif">
+</div>
+
+</div>
+
+<br>
 
 ### ePUNCH is an app that allows coffee shops to issue digital punch cards for their customers. In future version of the app customers will also be able to safely log in an have an overview of all their punch cards and their favorite coffee shops.
 
 ### In this beta version of the app:
 
-## - Coffee shops can sign up and log in with a secure password. And log out.
+<br/>
 
-## - Coffee shops can have a visual overview of all their active punch cards.
+### - Coffee shops can sign up and log in with a secure password. And log out.
 
-## - Coffee shops can also punch the card until they reach the max of 10 punches.
+### - Coffee shops can have a visual overview of all their active punch cards.
 
-## - Coffee shops can reset the card back to 0 punches.
+### - Coffee shops can also punch the card until they reach the max of 10 punches.
 
-## - Coffee shops can delete a punch card.
+### - Coffee shops can reset the card back to 0 punches.
 
-## - Coffee shops can look their profile and update any field.
+### - Coffee shops can delete a punch card.
 
-## - Coffee shops can issue a new card to any ePUNCH customer. The issued card will automatically be associated with the issuing coffee shop.
+### - Coffee shops can look their profile and update any field.
 
-**Getting started:**
+### - Coffee shops can issue a new card to any ePUNCH customer. The issued card will automatically be associated with the issuing coffee shop.
+
+<br/>
+
+## Installation
 
 You can use the following commands to run the application:
 
-- `bundle install`
-- `npm install`
-- rails db:migrate
-- rails db:seed
+```ruby
+$ git clone
+$ bundle install
+$ npm install
+$ rails db:migrate
+$ rails db:seed
+$ rails s
+$ npm start --prefix client
+```
 
-- `rails s`: run the backend on [http://localhost:3000](http://localhost:3000)
-- `npm start --prefix client`: run the frontend on
-  [http://localhost:4000](http://localhost:4000)
--
+Open Chrome browser, and redirect to 'http://localhost:4000' to start the app.
+<br/>
+The backend will be running at 'http://localhost:3000'
+
+<br/>
+
+## Stack
+
+- [x] Active Record
+- [x] Rails
+- [x] Bcrypt
+- [x] PostgreSQL

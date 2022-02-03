@@ -11,7 +11,7 @@ function Signup({ setCurrentUser }) {
   const [address, setAddress] = useState("");
   const [description, setDescription] = useState("");
   const [contact, setContact] = useState("");
-  const [error, setError] = useState("")
+  const [error, setError] = useState("");
   const history = useHistory();
 
   const handleSubmit = (e) => {
@@ -38,11 +38,10 @@ function Signup({ setCurrentUser }) {
           history.push("/profile");
         });
       } else {
-        response.json()
-        .then((error) => {
-          console.log(error.errors)
-          setError(error.errors)
-        })
+        response.json().then((error) => {
+          console.log(error.errors);
+          setError(error.errors);
+        });
       }
     });
   };
@@ -54,7 +53,7 @@ function Signup({ setCurrentUser }) {
         <input
           className="custom-imputs"
           type="text"
-          placeholder="Name..."
+          placeholder="Coffee Shop name..."
           value={name}
           onChange={(e) => setName(e.target.value)}
         />
@@ -109,10 +108,17 @@ function Signup({ setCurrentUser }) {
         />
         <br />
         <br />
-        {error? (<React.Fragment>
-          <p className="error">{error.map(e => <p>{e}</p>)}</p>
-   
-        </React.Fragment>) : (<React.Fragment> </React.Fragment>)}
+        {error ? (
+          <React.Fragment>
+            <p className="error">
+              {error.map((e) => (
+                <p>{e}</p>
+              ))}
+            </p>
+          </React.Fragment>
+        ) : (
+          <React.Fragment> </React.Fragment>
+        )}
         <button className="custom-button" type="submit">
           SIGNUP
         </button>
