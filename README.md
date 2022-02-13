@@ -51,6 +51,10 @@ Open Chrome browser, and redirect to 'http://localhost:4000' to start the app.
 <br/>
 The backend will be running at 'http://localhost:3000'
 
+**Alternatively, it is fully deployed on Heroku!**
+<br>
+<a href="https://mighty-waters-69972.herokuapp.com/">ePunch</a>
+
 <br/>
 
 ## Stack
