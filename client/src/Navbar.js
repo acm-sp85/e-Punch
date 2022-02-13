@@ -1,13 +1,7 @@
-import React from "react";
-import { Link, useHistory } from "react-router-dom";
-const navbar = () => {
-  const history = useHistory();
-  const logOut = () => {
-    fetch("/logout", { method: "DELETE" }).then(() => {
-      console.log("logged out");
-      history.push("/");
-    });
-  };
+import React from 'react';
+import { Link, useHistory } from 'react-router-dom';
+
+const navbar = ({ currentUser }) => {
   return (
     <div>
       <h1 className="logo">ePUNCH</h1>
@@ -24,7 +18,7 @@ const navbar = () => {
         <Link to="/issue-new-card">NEW CARD</Link>
       </li>
 
-      <button className="custom-button" onClick={logOut}>
+      <button className="custom-button" onClick={currentUser.logOut}>
         LOG OUT
       </button>
     </div>

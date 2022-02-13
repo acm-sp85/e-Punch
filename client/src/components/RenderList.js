@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import "../App.css";
+import React, { useState, useEffect, useRef } from 'react';
+import '../App.css';
 
 function renderingList(props) {
   const [punchCards, setPunchCards] = useState(
@@ -8,24 +8,27 @@ function renderingList(props) {
 
   const [coffeeShopId] = useState(props.currentUser.currentUser.id);
 
+  const elementRef = useRef();
+
   useEffect(() => {
     fetch(`/coffee_shops/${coffeeShopId}/punch_cards`, {
-      credentials: "include",
+      credentials: 'include',
     }).then((res) => {
       if (res.ok) {
         res.json().then((coffee_shop_punchCards) => {
           setPunchCards(coffee_shop_punchCards);
         });
       } else {
-        console.log("Problems loading the user");
+        console.log('Problems loading the user');
       }
     });
   }, []);
-
+  
   //PUNCHING CARD
   const punchCard = (e) => {
     const punch_card_id = e.target.id;
     const punchedCard = punchCards.find((card) => card.id == punch_card_id);
+    elementRef.current.scrollIntoView({ behavior: 'smooth' });
 
     const updatingCard = punchCards.map((card) => {
       if (card.id == punch_card_id && card.counter < 10) {
@@ -33,8 +36,8 @@ function renderingList(props) {
       }
     });
     const requestOptions = {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json" },
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         counter: punchedCard.counter,
       }),
@@ -42,9 +45,9 @@ function renderingList(props) {
 
     fetch(`/punch_cards/${punch_card_id}`, requestOptions).then((response) => {
       if (response.ok) {
-        console.log("Card punched correctly");
+        console.log('Card punched correctly');
       } else {
-        console.log("Problems punching the card");
+        console.log('Problems punching the card');
         punchCards.map((card) => {
           if (card.id == punch_card_id && card.counter < 10) {
             card.counter -= 1;
@@ -64,8 +67,8 @@ function renderingList(props) {
     });
 
     const requestOptions = {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json" },
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         counter: 0,
       }),
@@ -73,9 +76,9 @@ function renderingList(props) {
 
     fetch(`/punch_cards/${punch_card_id}`, requestOptions).then((response) => {
       if (response.ok) {
-        console.log("Card reset correctly");
+        console.log('Card reset correctly');
       } else {
-        console.log("Problems resetting the card");
+        console.log('Problems resetting the card');
         punchCards.map((card) => {
           if (card.id == punch_card_id && card.counter < 10) {
             card.counter -= 1;
@@ -93,20 +96,20 @@ function renderingList(props) {
     setPunchCards(filteredCards);
 
     const requestOptions = {
-      method: "DELETE",
-      headers: { "Content-Type": "application/json" },
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({}),
     };
 
     fetch(`/punch_cards/${punch_card_id}`, requestOptions).then(
-      console.log("Punch card deleted")
+      console.log('Punch card deleted')
     );
   };
 
   return (
     <div>
       {punchCards.map((item) => (
-        <div key={item.id}>
+        <div key={item.id} ref={elementRef}>
           <div className="card" className="custom-card">
             <img
               src="https://uploads-ssl.webflow.com/6046a7b973c7a186ae5ce9d3/6046a7b973c7a107ee5cea18_Testimonial%20User.svg"

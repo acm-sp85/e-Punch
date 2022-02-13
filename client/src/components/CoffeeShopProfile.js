@@ -1,20 +1,20 @@
-import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
-import "../App.css";
+import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
+import '../App.css';
 
 function Profile(props) {
   const [currentUser, setCurrentUser] = useState(props.currentUser);
-  const [name, setName] = useState("");
-  const [address, setAddress] = useState("");
-  const [description, setDescription] = useState("");
-  const [contact, setContact] = useState("");
+  const [name, setName] = useState('');
+  const [address, setAddress] = useState('');
+  const [description, setDescription] = useState('');
+  const [contact, setContact] = useState('');
   const [toggleToEdit, setToggleToEdit] = useState(true);
-  const [coffee_shop_id, setCoffee_shop_id] = useState("");
+  const [coffee_shop_id, setCoffee_shop_id] = useState('');
   const history = useHistory();
 
   useEffect(() => {
-    fetch("/me", {
-      credentials: "include",
+    fetch('/me', {
+      credentials: 'include',
     }).then((res) => {
       if (res.ok) {
         res.json().then((user) => {
@@ -39,8 +39,8 @@ function Profile(props) {
     e.preventDefault();
 
     const requestOptions = {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json" },
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         name,
         address,
@@ -53,17 +53,19 @@ function Profile(props) {
       .then((response) => response.json())
       .then((updated) => {
         setCurrentUser(updated);
-        history.push("/");
+        history.push('/');
       });
   };
 
   return (
     <div>
       {toggleToEdit ? (
-        <div>
+        <div
+          style={{ maxWidth: '250px', alignContent: 'center', margin: 'auto' }}
+        >
           <h1>{currentUser.name}</h1>
-          <p>{currentUser.address}</p>
-          <p>{currentUser.contact}</p>
+          <h2>{currentUser.address}</h2>
+          <h3>{currentUser.contact}</h3>
           <p>{currentUser.description}</p>
           <p>{currentUser.user_name}</p>
           <button onClick={toggle} className="custom-button">

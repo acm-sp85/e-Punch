@@ -1,16 +1,25 @@
-import React from "react";
-import Home from "./components/Home";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import RenderList from "./components/RenderList";
-import CoffeeShopProfile from "./components/CoffeeShopProfile";
-import IssueCard from "./components/IssueCard";
-import Navbar from "./Navbar";
-import SignupCustomer from "./components/SignupCustomer";
+import React from 'react';
+import Home from './components/Home';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  useHistory,
+} from 'react-router-dom';
+import RenderList from './components/RenderList';
+import CoffeeShopProfile from './components/CoffeeShopProfile';
+import IssueCard from './components/IssueCard';
+import Navbar from './Navbar';
+import SignupCustomer from './components/SignupCustomer';
 
-function AuthenticatedApp(currentUser, setCurrentUser) {
+function AuthenticatedApp(currentUser, setCurrentUser, logOut) {
   return (
     <Router>
-      <Navbar />
+      <Navbar
+        currentUser={currentUser}
+        setCurrentUser={setCurrentUser}
+        logOut={logOut}
+      />
       <Switch>
         <Route
           exact

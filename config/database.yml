@@ -1,10 +1,7 @@
-
-# Configure Using Gemfile
-# gem 'pg'
-#
 default: &default
   adapter: postgresql
   encoding: unicode
+
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 
 development:
@@ -14,17 +11,11 @@ development:
   database: db/development.sqlite3
 
 test:
-  adapter: postgresql
-  encoding: unicode
+  <<: *default
   database: coffee_shops_test
-  pool:  <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  username: franciscoacontellmonje
-  password:
 
 production:
-   adapter: postgresql
-  encoding: unicode
+  <<: *default
   database: coffee_shops_production
-  pool:  <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  username: franciscoacontellmonje
-  password:
+  username: react_rails_api_project_template
+  password: <%= ENV['REACT_RAILS_API_PROJECT_TEMPLATE_DATABASE_PASSWORD'] %>
