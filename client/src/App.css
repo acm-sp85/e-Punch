@@ -1,5 +1,4 @@
 * {
-  text-align: center;
   margin-top: 25px;
 }
 
@@ -10,17 +9,23 @@
 .logo {
   font-family: 'Monsieur La Doulaise', cursive;
   margin-bottom: 30px;
+  text-align: center;
 }
 .coffee-shop-icon {
   max-width: 200px;
 }
 
+.form {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
 body {
   background-color: #fff3e3;
-  font-family: 'Fugue', Helvetica, Arial, sans-serif !important;
-  font-size: 14px !important;
-  color: #2a317d !important;
-  letter-spacing: 0.7px !important;
+  font-family: 'Fugue', Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  color: #2a317d;
+  letter-spacing: 0.7px;
 }
 
 a {
@@ -45,6 +50,12 @@ a {
   margin-left: 30px;
   justify-content: center;
   align-items: center;
+  text-align: center;
+}
+
+.centered {
+  text-align: center;
+  justify-content: center;
 }
 
 .navbar:hover {
@@ -58,6 +69,14 @@ a {
 }
 .custom-card {
   background-color: #fff3e3;
+  text-align: center;
+  float: left;
+
+  /* width: 300px; */
+  padding: -30px;
+}
+.card-text {
+  height: 300px;
 }
 
 .custom-button {
@@ -105,6 +124,6 @@ a {
   margin: auto;
 }
 
-.card {
-  max-width: 300px;
+.col-1-of-3 {
+  width: calc(100% - 2 * 100vw / 3);
 }

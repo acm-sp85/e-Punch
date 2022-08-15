@@ -1,9 +1,25 @@
-import React from "react";
-import { Switch, Route, Redirect, Link } from "react-router-dom";
-import Login from "./components/Login";
-import Signup from "./components/Signup";
+import React, { useEffect, useState } from 'react';
+import { Switch, Route, Redirect } from 'react-router-dom';
+import Login from './components/Login';
+import Signup from './components/Signup';
+import RenderShops from './components/RenderShops';
 
 function UnauthenticatedApp({ setCurrentUser }) {
+  const [shops, setShops] = useState([]);
+  useEffect(() => {
+    fetch('/coffee_shops', {
+      credentials: 'include',
+    }).then((res) => {
+      if (res.ok) {
+        res.json().then((shops) => {
+          shops.shift();
+          setShops(shops);
+        });
+      } else {
+        console.log('shops not loaded');
+      }
+    });
+  }, []);
   return (
     <div>
       <nav>
@@ -20,6 +36,18 @@ function UnauthenticatedApp({ setCurrentUser }) {
         </Route>
         <Redirect to="/" />
       </Switch>
+      <div>
+        <h2 className="centered">Affiliate Coffee shops in our platform</h2>
+        {shops.length > 1 ? (
+          <div>
+            {shops.map((shop) => (
+              <RenderShops info={shop} key={shop.id} />
+            ))}
+          </div>
+        ) : (
+          <div></div>
+        )}
+      </div>
     </div>
   );
 }

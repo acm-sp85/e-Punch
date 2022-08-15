@@ -58,7 +58,7 @@ function Profile(props) {
   };
 
   return (
-    <div>
+    <div className="centered">
       {toggleToEdit ? (
         <div
           style={{ maxWidth: '250px', alignContent: 'center', margin: 'auto' }}

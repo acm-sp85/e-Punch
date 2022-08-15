@@ -14,7 +14,7 @@ import SignupCustomer from './components/SignupCustomer';
 
 function AuthenticatedApp(currentUser, setCurrentUser, logOut) {
   return (
-    <Router>
+    <Router >
       <Navbar
         currentUser={currentUser}
         setCurrentUser={setCurrentUser}

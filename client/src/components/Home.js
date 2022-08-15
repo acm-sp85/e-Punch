@@ -25,7 +25,7 @@ function Home(props) {
   }, []);
 
   return (
-    <div class="row">
+    <div class="row centered">
       <img
         src={require('../coffee_shop.png')}
         style={{ maxHeight: '200px', marginTop: '-13px' }}

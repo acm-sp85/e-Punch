@@ -1,15 +1,15 @@
-import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
-import "../App.css";
+import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import '../App.css';
 
 function IssueNew({ currentUser, setCurrentUser }) {
-  const [email, setEmail] = useState("");
-  const [name, setName] = useState("");
-  const [contact, setContact] = useState("");
-  const [customerId, setCustomerId] = useState("");
+  const [email, setEmail] = useState('');
+  const [name, setName] = useState('');
+  const [contact, setContact] = useState('');
+  const [customerId, setCustomerId] = useState('');
   const [toggleButton, setToggleButton] = useState(false);
   const [toggleError, setToggleError] = useState(false);
-  const [error, setError] = useState("")
+  const [error, setError] = useState('');
 
   const history = useHistory();
 
@@ -18,8 +18,8 @@ function IssueNew({ currentUser, setCurrentUser }) {
 
     if (toggleError) {
       const requestOptions = {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           user_name: email,
           name,
@@ -27,29 +27,27 @@ function IssueNew({ currentUser, setCurrentUser }) {
         }),
       };
 
-      fetch("/customers", requestOptions).then((response) => {
+      fetch('/customers', requestOptions).then((response) => {
         if (response.ok) {
           response.json().then((newCustomer) => {
             setCustomerId(newCustomer.id);
             setToggleButton(!toggleButton);
             setToggleError(!toggleError);
-            setError("")
-            console.log("user created")
+            setError('');
+            console.log('user created');
           });
         } else {
-
-          response.json()
-          .then((error) => {
-            console.log(error.errors)
-            setError(error.errors)
-          })
+          response.json().then((error) => {
+            console.log(error.errors);
+            setError(error.errors);
+          });
         }
       });
     } else {
-      console.log("issue a card");
+      console.log('issue a card');
       const requestOptionsCard = {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           coffee_shop_id: currentUser.currentUser.id,
           customer_id: customerId,
@@ -57,28 +55,24 @@ function IssueNew({ currentUser, setCurrentUser }) {
         }),
       };
 
-      fetch("/punch_cards", requestOptionsCard)
-      
-        .then((response) => {
-          if (response.ok){
-            history.push("/cards");
-
-          }else {
-            response.json()
-            .then((error) => {
-              console.log(error.error)
-            })
-          }
-        });
+      fetch('/punch_cards', requestOptionsCard).then((response) => {
+        if (response.ok) {
+          history.push('/cards');
+        } else {
+          response.json().then((error) => {
+            console.log(error.error);
+          });
+        }
+      });
     }
   };
-  //NEED TO LOOKUP A CUSTOMER ON OUR CUSTOMERS DB BY THEIR EMAIL. IF IT RETURNS SOMETHING THEN WE WILL ACTIVATE THE ISSUE CARD BUTTON
+  //NEED TO LOOKUP A CUSTOMER IN OUR CUSTOMERS DB BY THEIR EMAIL. IF IT RETURNS SOMETHING THEN WE WILL ACTIVATE THE ISSUE CARD BUTTON
   const checkCustomer = (e) => {
     e.preventDefault();
 
     const requestUserCheck = {
-      method: "GET",
-      headers: { "Content-Type": "application/json" },
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' },
     };
 
     fetch(`/customers/find/${email}`, requestUserCheck)
@@ -88,7 +82,7 @@ function IssueNew({ currentUser, setCurrentUser }) {
           return response.json();
         } else {
           setToggleError(true);
-          throw new Error("Something went wrong");
+          throw new Error('Something went wrong');
         }
       })
       .then((user) => {
@@ -98,12 +92,12 @@ function IssueNew({ currentUser, setCurrentUser }) {
   };
 
   const signUpNewCustomer = () => {
-    console.log("create new customer");
-    history.push("/new-customer");
+    console.log('create new customer');
+    history.push('/new-customer');
   };
 
   return (
-    <div>
+    <div className="centered">
       <h3>ISSUE CARD</h3>
       {toggleError ? (
         <React.Fragment>
@@ -146,10 +140,17 @@ function IssueNew({ currentUser, setCurrentUser }) {
         ) : (
           <React.Fragment></React.Fragment>
         )}
-        {error? (<React.Fragment>
-          <p className="error">{error.map(e => <p>{e}</p>)}</p>
-   
-        </React.Fragment>) : (<React.Fragment> </React.Fragment>)}
+        {error ? (
+          <React.Fragment>
+            <p className="error">
+              {error.map((e) => (
+                <p>{e}</p>
+              ))}
+            </p>
+          </React.Fragment>
+        ) : (
+          <React.Fragment> </React.Fragment>
+        )}
         {toggleError ? (
           <React.Fragment>
             <br />

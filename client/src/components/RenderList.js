@@ -23,7 +23,7 @@ function renderingList(props) {
       }
     });
   }, []);
-  
+
   //PUNCHING CARD
   const punchCard = (e) => {
     const punch_card_id = e.target.id;
@@ -110,7 +110,7 @@ function renderingList(props) {
     <div>
       {punchCards.map((item) => (
         <div key={item.id} ref={elementRef}>
-          <div className="card" className="custom-card">
+          <div className="custom-card col-1-of-3">
             <img
               src="https://uploads-ssl.webflow.com/6046a7b973c7a186ae5ce9d3/6046a7b973c7a107ee5cea18_Testimonial%20User.svg"
               className="avatar"
@@ -121,7 +121,7 @@ function renderingList(props) {
                 {item.customer_name}
               </h5>
 
-              <p className="card-text">{item.counter} / 10</p>
+              <p>{item.counter} / 10</p>
               <a
                 className="custom-button"
                 href="#"

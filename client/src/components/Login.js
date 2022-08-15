@@ -37,7 +37,7 @@ function Login({ setCurrentUser }) {
   };
 
   return (
-    <div>
+    <div className="form">
       {error ? (
         <div>
           <p className="error">{error}</p>
