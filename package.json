@@ -5,7 +5,8 @@
     "node": "v16.13.1"
   },
   "scripts": {
-    "build": "npm install --prefix client && npm run build --prefix client",
+    // "build": "npm install --prefix client && npm run build --prefix client",
+    "build": "npm install --prefix client && rails db:migrate && rails db:seed && rails s && npm run build --prefix client",
     "clean": "rm -rf public",
     "deploy": "cp -a client/build/. public/",
     "heroku-postbuild": "npm run clean && npm run build && npm run deploy"
