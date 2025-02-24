@@ -12,3 +12,40 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model CoffeeShop {
+  id             Int      @id @default(autoincrement())
+  name           String
+  address        String
+  description    String
+  contact        String
+  userName       String  @map("user_name")
+  passwordDigest String  @map("password_digest")
+  createdAt      DateTime @default(now()) @map("created_at")
+  updatedAt      DateTime @updatedAt @map("updated_at")
+  punchCards     PunchCard[]
+}
+
+model Customer {
+  id        Int      @id @default(autoincrement())
+  name      String
+  contact   String
+  userName  String  @map("user_name")
+  photo     String?
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  punchCards PunchCard[]
+}
+
+model PunchCard {
+  id          Int      @id @default(autoincrement())
+  counter     Int
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  coffeeShop  CoffeeShop @relation(fields: [coffeeShopId], references: [id])
+  coffeeShopId Int
+
+  customer    Customer @relation(fields: [customerId], references: [id])
+  customerId  Int
+}
