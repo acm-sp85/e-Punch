@@ -10,16 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_29_140542) do
-
+ActiveRecord::Schema[7.2].define(version: 2021_10_29_140542) do
   create_table "coffee_shops", force: :cascade do |t|
     t.string "name"
     t.string "address"
     t.string "description"
     t.string "contact"
     t.string "user_name"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "password_digest"
   end
 
@@ -27,17 +26,16 @@ ActiveRecord::Schema.define(version: 2021_10_29_140542) do
     t.string "name"
     t.string "contact"
     t.string "user_name"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "photo"
   end
 
   create_table "punch_cards", force: :cascade do |t|
     t.integer "coffee_shop_id"
     t.integer "customer_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.integer "counter"
   end
-
 end
