@@ -41,5 +41,5 @@ gem 'rspec-json_expectations', '~> 2.2'
 end
 
 group :production do
-  gem 'pg', '~> 1.2'  # Latest PG version
+  # gem 'pg', '~> 1.2'  # Latest PG version
 end
