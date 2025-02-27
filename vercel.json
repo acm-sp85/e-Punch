@@ -1,0 +1,13 @@
+{
+  "builds": [
+    {
+      "src": "config.ru",
+      "use": "@vercel/ruby",
+      "config": {
+        "bundle": true,
+        "includeFiles": ["app/**", "config/**", "db/**", "public/**"],
+        "installCommand": "apt-get update && apt-get install -y libyaml-dev && bundle install"
+      }
+    }
+  ]
+}
